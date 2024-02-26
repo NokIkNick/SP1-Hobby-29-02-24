@@ -11,6 +11,9 @@ The business idea is to create a platform that not only provides information abo
 
 ## GROUP DESCRIPTION - HOW WE WORKED:
 
+- Used Kanban for project overview and distribution of to-do's.
+- Day 1: Created Github repository for the project + Kanban board. Created Domainmodel and ER-diagram. Created project in IntelliJ and established entity relations.
+
 ## TECHNICAL REQUIREMENTS:
 
 - JPA
