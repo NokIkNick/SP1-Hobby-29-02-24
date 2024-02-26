@@ -1,0 +1,43 @@
+@startuml
+Title Domain Model
+hide circle
+hide methods
+
+user  "1-* "-- hobby
+user "1-1"- user_details
+user_details "1 - 1"-- address
+zip "1 - *  "-- address
+
+
+class user{
+    username
+    password
+    is_admin
+}
+
+class hobby {
+    name
+    wiki_link
+    category
+    type
+}
+
+class user_details{
+    name
+    surname
+    age
+    gender
+    phone_number
+}
+
+class address{
+    street
+}
+
+class zip{
+    city_name
+    region_name
+    municipality_name
+}
+
+@enduml
