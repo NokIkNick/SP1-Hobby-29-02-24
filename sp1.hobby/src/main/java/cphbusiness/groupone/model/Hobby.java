@@ -20,6 +20,7 @@ public class Hobby {
     @ManyToMany(mappedBy = "hobbies")
     Set<User> usersSet = new HashSet<>();
 
+    @Column
     private String name;
     private String wiki_link;
     private String category;
