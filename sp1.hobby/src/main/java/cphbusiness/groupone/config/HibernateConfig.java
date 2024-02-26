@@ -49,7 +49,7 @@ public class HibernateConfig {
                 props.put("hibernate.hbm2ddl.auto", "create");
             else
                 //// in case we want to put production as update, dev is always create
-                props.put("hibernate.hbm2ddl.auto", "create");
+                props.put("hibernate.hbm2ddl.auto", "update");
 
 
 
