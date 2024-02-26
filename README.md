@@ -8,3 +8,19 @@ The business idea is to create a platform that not only provides information abo
 
 ## ERD:
 ![sp1.hobby/src/main/java/cphbusiness/groupone/docs/DomainModelHobby.png](sp1.hobby/src/main/java/cphbusiness/groupone/docs/DomainModelHobby.png)
+
+## GROUP DESCRIPTION - HOW WE WORKED:
+
+## TECHNICAL REQUIREMENTS:
+
+- JPA
+- JPQL
+- Java Streams API
+- Java Generics
+- Maven
+- JDK 17^
+- JUnit 5
+- Docker
+- PostgresSQL
+- pgAdmin
+- Lombok
