@@ -1,18 +1,15 @@
 package unitTests;
 
 import cphbusiness.groupone.config.HobbyConfig;
-import cphbusiness.groupone.dao.abstractDAOs.UserDetailsDAO;
 import cphbusiness.groupone.dao.abstractDAOs.ZipDAO;
 import cphbusiness.groupone.dao.implementations.ZipDAOImpl;
 import cphbusiness.groupone.model.Zip;
 import jakarta.persistence.EntityManager;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNotNull;
+import static org.junit.Assert.*;
 
 /**
  * Also tests DAO stuff
@@ -29,9 +26,9 @@ class ZipDAOTest {
     @Test
     void getInstance() {
         ZipDAO dao = ZipDAOImpl.getInstance();
-        assertNotNull(dao);
+        Assertions.assertNotNull(dao);
         ZipDAO dao2 = ZipDAOImpl.getInstance();
-        assertEquals(dao, dao2);
+        Assertions.assertEquals(dao, dao2);
     }
 
     @Test
@@ -39,9 +36,9 @@ class ZipDAOTest {
         Zip z = new Zip();
         CommonTestData.popZip(z, 999511, "Harry", "Power", "Potter");
         try(EntityManager em = HobbyConfig.getInstance().createEntityManager()){
-            assertNull(em.find(Zip.class, 999511));
+            Assertions.assertNull(em.find(Zip.class, 999511));
             dao.create(z);
-            assertNotNull(em.find(Zip.class, 999511));
+            Assertions.assertNotNull(em.find(Zip.class, 999511));
             dao.delete(z);
         }
     }
@@ -52,11 +49,11 @@ class ZipDAOTest {
         CommonTestData.popZip(z, 999511, "Harry", "Power", "Potter");
         try(EntityManager em = HobbyConfig.getInstance().createEntityManager()){
             dao.create(z);
-            assertTrue(em.find(Zip.class, z.getZip()).getCity_name() == "Harry");
+            Assertions.assertEquals("Harry", em.find(Zip.class, z.getZip()).getCity_name());
             z.setCity_name("Spike");
-            assertTrue(em.find(Zip.class, z.getZip()).getCity_name() == "Harry");
+            Assertions.assertSame("Harry", em.find(Zip.class, z.getZip()).getCity_name());
             dao.update(z);
-            assertTrue(em.find(Zip.class, z.getZip()).getCity_name() == "Spike");
+            Assertions.assertSame("Spike", em.find(Zip.class, z.getZip()).getCity_name());
             dao.delete(z);
         }
     }
@@ -66,16 +63,16 @@ class ZipDAOTest {
         Zip z = new Zip();
         CommonTestData.popZip(z, 999511, "Harry", "Power", "Potter");
         try(EntityManager em = HobbyConfig.getInstance().createEntityManager()){
-            assertNull(em.find(Zip.class, 999511));
+            Assertions.assertNull(em.find(Zip.class, 999511));
             dao.create(z);
-            assertNotNull(em.find(Zip.class, 999511));
+            Assertions.assertNotNull(em.find(Zip.class, 999511));
             dao.delete(z);
-            assertNull(em.find(Zip.class, 999511));
+            Assertions.assertNull(em.find(Zip.class, 999511));
         }
     }
 
     @Test
     void read() {
-        assertNotNull(dao.read(999999));
+        Assertions.assertNotNull(dao.read(999999));
     }
 }

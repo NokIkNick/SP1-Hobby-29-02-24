@@ -37,7 +37,6 @@ public abstract class DAO<T extends DTO<IDType>, IDType> implements IDAO<T, IDTy
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public T update(T obj, IDType id){
         T toReturn = null;
         if(obj != null){
@@ -57,7 +56,6 @@ public abstract class DAO<T extends DTO<IDType>, IDType> implements IDAO<T, IDTy
         return update(obj, obj.getID());
     }
 
-    @Override
     public void delete(Class<T> tClass, IDType id){
         try(var em = emf.createEntityManager()){
             em.getTransaction().begin();
@@ -70,10 +68,12 @@ public abstract class DAO<T extends DTO<IDType>, IDType> implements IDAO<T, IDTy
     }
 
     public void delete(T t){
-        delete((Class<T>) t.getClass(), t.getID());
+        delete(getGenericType(t), t.getID());
     }
-    static <T> Class getGenericType(T t){
-        return t.getClass();
+
+    @SuppressWarnings("unchecked")
+    static <T> Class<T> getGenericType(T t){
+        return (Class<T>) t.getClass();
     }
 
 

@@ -1,5 +1,6 @@
 package cphbusiness.groupone.dao;
 
+@SuppressWarnings("UnusedReturnValue")
 public interface IDAO<T, IDType>{
     void create(T in);
 

@@ -7,7 +7,6 @@ import cphbusiness.groupone.dao.implementations.UserDAOImpl;
 import cphbusiness.groupone.dao.implementations.ZipDAOImpl;
 import cphbusiness.groupone.model.*;
 import jakarta.persistence.EntityManagerFactory;
-import org.hibernate.Hibernate;
 
 public class Main {
     public static void main(String[] args) {

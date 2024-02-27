@@ -20,10 +20,6 @@ public class Address implements DTO<String>{
     private String id;
     private String street;
 
-    private Address(String street) {
-        this.street = street;
-    }
-
     @OneToOne
     @MapsId
     private UserDetails userDetails;

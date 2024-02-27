@@ -8,7 +8,6 @@ import cphbusiness.groupone.dao.implementations.ZipDAOImpl;
 import cphbusiness.groupone.model.Hobby;
 import cphbusiness.groupone.model.Type;
 import cphbusiness.groupone.model.Zip;
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
 class CommonTestData {

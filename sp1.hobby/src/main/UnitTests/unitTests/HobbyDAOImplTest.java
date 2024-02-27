@@ -1,9 +1,8 @@
 package unitTests;
 
 import cphbusiness.groupone.dao.abstractDAOs.HobbyDAO;
-import cphbusiness.groupone.dao.abstractDAOs.UserDetailsDAO;
 import cphbusiness.groupone.dao.implementations.HobbyDAOImpl;
-import cphbusiness.groupone.dao.implementations.UserDetailsDAOImpl;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertNotNull;
 
+@SuppressWarnings("FieldCanBeLocal")
 class HobbyDAOImplTest {
     private static HobbyDAO dao;
 
@@ -24,8 +24,8 @@ class HobbyDAOImplTest {
     @Test
     void getInstance() {
         HobbyDAO dao = HobbyDAOImpl.getInstance();
-        assertNotNull(dao);
+        Assertions.assertNotNull(dao);
         HobbyDAO dao2 = HobbyDAOImpl.getInstance();
-        assertEquals(dao, dao2);
+        Assertions.assertEquals(dao, dao2);
     }
 }

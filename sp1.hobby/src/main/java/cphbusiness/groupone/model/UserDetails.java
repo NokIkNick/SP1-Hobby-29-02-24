@@ -34,6 +34,7 @@ public class UserDetails implements DTO<String>{
 
 
 
+    @SuppressWarnings("UnusedReturnValue")
     public User addUser(User user){
         if(user != null){
             this.user = user;
@@ -49,6 +50,7 @@ public class UserDetails implements DTO<String>{
      * This was created due to how working with databases you CANNOT just create a new object with the same
      * @return The Address associated with UserDetails
      */
+    @SuppressWarnings("UnusedReturnValue")
     public Address setAddress(Address address) {
         if (address != null && !Objects.equals(this.address,address)) {
             this.address.setStreet(address.getStreet());

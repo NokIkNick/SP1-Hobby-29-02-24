@@ -46,6 +46,7 @@ public class User implements DTO<String> {
         this.is_admin = is_admin;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public UserDetails setUserDetails(UserDetails userDetails){
         if(userDetails != null && !Objects.equals(this.userDetails,userDetails)){
             this.userDetails = userDetails;
@@ -54,6 +55,7 @@ public class User implements DTO<String> {
         return userDetails;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public Hobby addHobby(Hobby hobby){
         if(hobby != null && !hobbies.contains(hobby)){
             Hibernate.initialize(this.hobbies);
@@ -62,6 +64,7 @@ public class User implements DTO<String> {
         }
         return hobby;
     }
+    @SuppressWarnings("UnusedReturnValue")
     public Hobby addHobbyToInterests(Hobby hobby){
         if(hobby != null){
             Hibernate.initialize(this.hobbyInterests);
