@@ -1,10 +1,7 @@
 package cphbusiness.groupone;
 
 import cphbusiness.groupone.config.HobbyConfig;
-import cphbusiness.groupone.dao.implementations.AddressDAOImpl;
-import cphbusiness.groupone.dao.implementations.HobbyDAOImpl;
-import cphbusiness.groupone.dao.implementations.UserDAOImpl;
-import cphbusiness.groupone.dao.implementations.ZipDAOImpl;
+import cphbusiness.groupone.dao.implementations.*;
 import cphbusiness.groupone.model.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -17,8 +14,10 @@ public class Main {
         HobbyDAOImpl hobbyDAO = HobbyDAOImpl.getInstance();
         AddressDAOImpl addressDAO = AddressDAOImpl.getInstance();
         ZipDAOImpl zipDAO = ZipDAOImpl.getInstance();
+        UserDetailsDAOImpl userDetailsDAO = new UserDetailsDAOImpl();
 
-            Hobby hobby1 = hobbyDAO.read(1, Hobby.class);
+
+            /*Hobby hobby1 = hobbyDAO.read(1, Hobby.class);
             Zip zip1 = zipDAO.read(9293, Zip.class);
             boolean wasFound = true;
             User user1 = userDAO.read("Christian1234", User.class);

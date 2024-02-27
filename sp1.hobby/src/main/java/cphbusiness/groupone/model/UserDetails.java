@@ -3,12 +3,14 @@ package cphbusiness.groupone.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Objects;
 
 @Getter
 @Setter
 @Entity(name = "user_details")
+@ToString
 public class UserDetails {
     @Id
     private String id;
