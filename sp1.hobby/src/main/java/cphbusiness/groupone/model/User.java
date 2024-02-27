@@ -31,7 +31,7 @@ public class User implements DTO<String> {
             return new UserDetails();
         return userDetails;
     }
-
+  
     @ManyToMany(cascade = {CascadeType.DETACH},fetch = FetchType.EAGER)
     @JoinTable(name = "hobbys", joinColumns = @JoinColumn(name = "username"), inverseJoinColumns = @JoinColumn(name = "hobby_id"))
     private Set<Hobby> hobbies = new HashSet<>();

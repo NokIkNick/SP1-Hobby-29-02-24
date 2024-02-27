@@ -11,6 +11,14 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity(name = "hobby")
+@NamedQueries(
+        {
+                // US - 5
+                @NamedQuery(name = "Hobby.countOfPeopleByHobby", query = "select size(h.usersSet) from hobby h where id = ?1"),
+                // US - 6
+                @NamedQuery(name = "Hobby.findHobbiesWithInterestCounts", query = "SELECT h, size(h.interestedUsers) FROM hobby h")
+      
+)
 public class Hobby implements DTO<Integer>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +29,7 @@ public class Hobby implements DTO<Integer>{
     @ManyToMany(mappedBy = "hobbies", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<User> usersSet = new HashSet<>();
 
-    @ManyToMany(mappedBy = "hobbyInterests", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "hobbyInterests",fetch = FetchType.EAGER)
     private Set<User> interestedUsers = new HashSet<>();
 
     @Column

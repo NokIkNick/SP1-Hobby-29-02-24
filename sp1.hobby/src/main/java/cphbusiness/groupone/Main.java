@@ -6,17 +6,32 @@ import cphbusiness.groupone.dao.implementations.HobbyDAOImpl;
 import cphbusiness.groupone.dao.implementations.UserDAOImpl;
 import cphbusiness.groupone.dao.implementations.ZipDAOImpl;
 import cphbusiness.groupone.model.*;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.criteria.CriteriaBuilder;
+
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
         EntityManagerFactory emf = HobbyConfig.getInstance(false);
+
         UserDAOImpl userDAO = UserDAOImpl.getInstance();
         HobbyDAOImpl hobbyDAO = HobbyDAOImpl.getInstance();
         AddressDAOImpl addressDAO = AddressDAOImpl.getInstance();
         ZipDAOImpl zipDAO = ZipDAOImpl.getInstance();
+        // US - 6
+        Map<Hobby,Integer> result = hobbyDAO.getHobbyWithCountOfInterestedPeople();
+       for (Map.Entry<Hobby,Integer> m : result.entrySet()){
+           Hobby hobby = m.getKey();
+           Integer interested = m.getValue();
+           if(interested > 0) {
+               System.out.println("Hobby " + hobby.getName() + " has " + interested + " interested people");
+           }
+       }
 
 
+        System.out.println(hobbyDAO.getCountOfPeopleByHobbyId(1));
         boolean wasFound = true;
         User user1 = userDAO.read("Christian12345");
         if(user1 == null){

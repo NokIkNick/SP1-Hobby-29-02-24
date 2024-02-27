@@ -7,7 +7,7 @@ import jakarta.persistence.EntityManagerFactory;
 
 public abstract class DAO<T extends DTO<IDType>, IDType> implements IDAO<T, IDType> {
 
-    static EntityManagerFactory emf;
+    protected static EntityManagerFactory emf;
 
     public DAO(){
         emf = HobbyConfig.getInstance(/* Ja den skal være tom, da vi skal kunne teste på den! */);
