@@ -2,9 +2,7 @@ package cphbusiness.groupone.model;
 
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.Hibernate;
 
 import java.util.HashSet;
