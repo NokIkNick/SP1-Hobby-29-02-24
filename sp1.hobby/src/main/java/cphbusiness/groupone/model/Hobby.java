@@ -20,7 +20,6 @@ import java.util.Set;
                 @NamedQuery(name = "Hobby.findHobbiesWithInterestCounts", query = "SELECT h, size(h.interestedUsers) FROM hobby h")
         }
 )
-
 public class Hobby {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
