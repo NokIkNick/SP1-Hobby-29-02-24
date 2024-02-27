@@ -2,6 +2,7 @@ package cphbusiness.groupone.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
@@ -10,6 +11,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "users")
 public class User {
     @Id
@@ -23,9 +25,14 @@ public class User {
     @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
     private UserDetails userDetails;
 
-
     @ManyToMany
     private Set<Hobby> hobbies = new HashSet<>();
+
+    public User(String username, String password, boolean is_admin) {
+        this.username = username;
+        this.password = password;
+        this.is_admin = is_admin;
+    }
 
     UserDetails addUserDetails(UserDetails userDetails){
         if(userDetails != null){
