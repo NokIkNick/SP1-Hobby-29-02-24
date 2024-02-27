@@ -3,6 +3,8 @@ package cphbusiness.groupone.dao.implementations;
 import cphbusiness.groupone.dao.abstractDAOs.HobbyDAO;
 import cphbusiness.groupone.model.Hobby;
 
+import java.util.Map;
+
 public class HobbyDAOImpl extends HobbyDAO {
 
     private static HobbyDAOImpl instance;
@@ -18,4 +20,8 @@ public class HobbyDAOImpl extends HobbyDAO {
         super();
     }
 
+    @Override
+    public Map<Hobby, Integer> getHobbyWithCountOfInterestedPeople() {
+        return null;
+    }
 }
