@@ -12,6 +12,7 @@ import jakarta.persistence.EntityManagerFactory;
 public class Main {
     public static void main(String[] args) {
         EntityManagerFactory emf = HobbyConfig.getInstance(false);
+
         UserDAOImpl userDAO = UserDAOImpl.getInstance();
         HobbyDAOImpl hobbyDAO = HobbyDAOImpl.getInstance();
         AddressDAOImpl addressDAO = AddressDAOImpl.getInstance();
