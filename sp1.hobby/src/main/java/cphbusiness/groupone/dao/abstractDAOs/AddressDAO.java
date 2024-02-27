@@ -1,4 +1,6 @@
 package cphbusiness.groupone.dao.abstractDAOs;
 
-public abstract class AddressDAO {
+import cphbusiness.groupone.model.Address;
+
+public abstract class AddressDAO extends DAO<Address> {
 }
