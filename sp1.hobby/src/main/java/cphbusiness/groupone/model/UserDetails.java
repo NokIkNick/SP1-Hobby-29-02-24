@@ -8,8 +8,7 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@Entity
-@Table(name = "user_details")
+@Entity(name = "user_details")
 public class UserDetails {
     @Id
     private String id;
@@ -19,7 +18,7 @@ public class UserDetails {
     private int phone_number;
 
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     @MapsId
     private User user;
     @OneToOne(mappedBy = "userDetails",cascade = CascadeType.ALL)
@@ -30,7 +29,7 @@ public class UserDetails {
     public User addUser(User user){
         if(user != null){
             this.user = user;
-            user.addUserDetails(this);
+            user.setUserDetails(this);
         }
         return user;
     }
