@@ -28,9 +28,11 @@ public class User {
     private UserDetails userDetails;
 
     @ManyToMany(cascade =  {CascadeType.DETACH,CascadeType.MERGE},fetch = FetchType.EAGER)
+    @JoinTable(name = "hobbys", joinColumns = @JoinColumn(name = "username"), inverseJoinColumns = @JoinColumn(name = "hobby_id"))
     private Set<Hobby> hobbies = new HashSet<>();
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE},fetch = FetchType.EAGER)
+    @JoinTable(name = "hobbyInts", joinColumns = @JoinColumn(name = "username"), inverseJoinColumns = @JoinColumn(name = "hobby_id"))
     private Set<Hobby> hobbyInterests = new HashSet<>();
 
     public User(String username, String password, boolean is_admin) {
