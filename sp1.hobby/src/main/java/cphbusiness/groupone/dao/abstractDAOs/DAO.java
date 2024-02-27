@@ -9,7 +9,7 @@ import org.hibernate.Hibernate;
 
 public abstract class DAO <T> implements IDAO<T> {
 
-    private static EntityManagerFactory emf;
+    protected static EntityManagerFactory emf;
 
     public DAO(){
         emf = HobbyConfig.getInstance(false);
