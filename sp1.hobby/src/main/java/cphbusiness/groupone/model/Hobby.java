@@ -1,8 +1,7 @@
 package cphbusiness.groupone.model;
 
-import cphbusiness.groupone.config.HibernateConfig;
-import cphbusiness.groupone.config.HobbyConfig;
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.Hibernate;
@@ -12,15 +11,14 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Entity
-@Table(name = "hobby")
+@Entity(name = "hobby")
 public class Hobby {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToMany(mappedBy = "hobbies")
+    @ManyToMany(mappedBy = "hobbies", fetch = FetchType.EAGER)
     private Set<User> usersSet = new HashSet<>();
 
     @ManyToMany(mappedBy = "hobbyInterests")
@@ -34,16 +32,9 @@ public class Hobby {
     @Enumerated(EnumType.ORDINAL)
     private Type type;
 
-
+    @Transactional
     User addUser(User user){
-        if(user != null){
-           /* if(!Hibernate.isInitialized(this.usersSet)) {
-                try(EntityManager em = HobbyConfig.getInstance().createEntityManager()) {
-                    em.getTransaction().begin();
-                    Hibernate.initialize(this.usersSet);
-                    em.getTransaction().commit();
-                }
-            }*/
+        if(user != null && !usersSet.contains(user)){
             this.usersSet.add(user);
             user.addHobby(this);
         }
@@ -52,7 +43,8 @@ public class Hobby {
 
     User addInterestedUser(User user){
         if(user != null){
-            Hibernate.initialize(this.interestedUsers);
+            if(!Hibernate.isInitialized(this.interestedUsers))
+                Hibernate.initialize(this.interestedUsers);
             this.interestedUsers.add(user);
             user.addHobbyToInterests(this);
         }

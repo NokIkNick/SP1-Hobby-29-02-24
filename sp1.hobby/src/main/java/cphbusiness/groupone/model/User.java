@@ -1,6 +1,7 @@
 package cphbusiness.groupone.model;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,9 +13,8 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "users")
 @NoArgsConstructor
-@Table(name = "users")
 public class User {
     @Id
     @Column(name = "username", nullable = false)
@@ -24,13 +24,13 @@ public class User {
     private boolean is_admin;
 
 
-    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserDetails userDetails;
 
-    @ManyToMany
+    @ManyToMany(cascade =  {CascadeType.DETACH,CascadeType.MERGE},fetch = FetchType.EAGER)
     private Set<Hobby> hobbies = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE},fetch = FetchType.EAGER)
     private Set<Hobby> hobbyInterests = new HashSet<>();
 
     public User(String username, String password, boolean is_admin) {
@@ -39,22 +39,24 @@ public class User {
         this.is_admin = is_admin;
     }
 
-    public UserDetails addUserDetails(UserDetails userDetails){
+    public UserDetails setUserDetails(UserDetails userDetails){
         if(userDetails != null && !Objects.equals(this.userDetails,userDetails)){
             this.userDetails = userDetails;
             userDetails.addUser(this);
-
         }
         return userDetails;
     }
 
+    @Transactional
     public Hobby addHobby(Hobby hobby){
-        if(hobby != null){
+        if(hobby != null && !hobbies.contains(hobby)){
+            Hibernate.initialize(this.hobbies);
             this.hobbies.add(hobby);
             hobby.addUser(this);
         }
         return hobby;
     }
+    @Transactional
     Hobby addHobbyToInterests(Hobby hobby){
         if(hobby != null){
             Hibernate.initialize(this.hobbyInterests);
