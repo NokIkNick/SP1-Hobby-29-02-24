@@ -35,6 +35,16 @@ public abstract class DAO <T> implements IDAO<T> {
         return null;
     }
 
+    public T read (int id, Class<T> tClass) {
+        try(var em = emf.createEntityManager()){
+            T found = em.find(tClass,id);
+            if(found != null){
+                return found;
+            }
+        }
+        return null;
+    }
+
     @SuppressWarnings("unchecked")
     public T update(T obj, String id){
         T toReturn = null;
@@ -51,7 +61,33 @@ public abstract class DAO <T> implements IDAO<T> {
         return toReturn;
     }
 
+    public T update(T obj, int id){
+        T toReturn = null;
+        if(obj != null){
+            try(var em = emf.createEntityManager()){
+                em.getTransaction().begin();
+                Object found = em.find(getGenericType(obj), id);
+                if(found != null){
+                    toReturn = em.merge(obj);
+                    em.getTransaction().commit();
+                }
+            }
+        }
+        return toReturn;
+    }
+
     public void delete(Class<T> tClass,String id){
+        try(var em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            Object found = em.find(tClass,id);
+            if(found != null){
+                em.remove(found);
+                em.getTransaction().commit();
+            }
+        }
+    }
+
+    public void delete(Class<T> tClass,int id){
         try(var em = emf.createEntityManager()){
             em.getTransaction().begin();
             Object found = em.find(tClass,id);
