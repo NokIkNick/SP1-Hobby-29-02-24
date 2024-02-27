@@ -3,7 +3,6 @@ package cphbusiness.groupone.model;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
@@ -18,6 +17,7 @@ public class UserDetails implements DTO<String>{
     }
 
     @Id
+    @Setter(AccessLevel.NONE)
     private String id;
 
     private int age;
@@ -47,7 +47,6 @@ public class UserDetails implements DTO<String>{
      * Backup function which shouldn't be needed to be called ever.
      * instead use getAddress and change things there.
      * This was created due to how working with databases you CANNOT just create a new object with the same
-     * @param address
      * @return The Address associated with UserDetails
      */
     public Address setAddress(Address address) {
@@ -56,7 +55,8 @@ public class UserDetails implements DTO<String>{
             this.address.setZip(address.getZip());
             address = this.address;
             address.setUserDetails(this);
-        } else if(this.address == null) {
+        }
+        if(this.address == null && address != null) {
             this.address = address;
         }
         return this.address;

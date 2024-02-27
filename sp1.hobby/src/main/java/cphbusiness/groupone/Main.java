@@ -54,6 +54,14 @@ public class Main {
         else
             userDAO.update(user1);
 
+
+        User user2 = userDAO.read("Christian1234");
+        if(user2 == null){
+            user2 = new User("Christian1234", "1234", false);
+            userDAO.create(user2);
+        }
+        userDAO.delete(user2);
+
         /* Remember to close. */
         emf.close();
     }

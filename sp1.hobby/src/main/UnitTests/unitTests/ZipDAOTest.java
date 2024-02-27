@@ -15,6 +15,7 @@ class ZipDAOTest {
     @BeforeAll
     static void beforeAll(){
         emf = HobbyConfig.getInstance(true);
+        CommonTestData.setupHobbies();
     }
 
     @Test

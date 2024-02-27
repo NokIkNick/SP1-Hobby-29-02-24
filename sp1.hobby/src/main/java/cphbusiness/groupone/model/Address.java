@@ -1,6 +1,7 @@
 package cphbusiness.groupone.model;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +16,7 @@ import java.util.Objects;
 public class Address implements DTO<String>{
 
     @Id
+    @Setter(AccessLevel.NONE)
     private String id;
     private String street;
 

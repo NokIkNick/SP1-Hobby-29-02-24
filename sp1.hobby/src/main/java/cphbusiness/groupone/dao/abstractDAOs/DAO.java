@@ -68,6 +68,10 @@ public abstract class DAO<T extends DTO<IDType>, IDType> implements IDAO<T, IDTy
             }
         }
     }
+
+    public void delete(T t){
+        delete((Class<T>) t.getClass(), t.getID());
+    }
     static <T> Class getGenericType(T t){
         return t.getClass();
     }

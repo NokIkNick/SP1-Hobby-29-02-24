@@ -1,7 +1,6 @@
 package cphbusiness.groupone.dao.implementations;
 
 import cphbusiness.groupone.dao.abstractDAOs.UserDAO;
-import cphbusiness.groupone.model.User;
 
 public class UserDAOImpl extends UserDAO {
 

@@ -2,6 +2,7 @@ package cphbusiness.groupone.model;
 
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.Hibernate;
@@ -16,6 +17,7 @@ public class Hobby implements DTO<Integer>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
+    @Setter(AccessLevel.NONE)
     private Integer id;
 
     @ManyToMany(mappedBy = "hobbies", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
@@ -32,7 +34,6 @@ public class Hobby implements DTO<Integer>{
     @Enumerated(EnumType.ORDINAL)
     private Type type;
 
-    @Transactional
     User addUser(User user){
         if(user != null && !usersSet.contains(user)){
             this.usersSet.add(user);
