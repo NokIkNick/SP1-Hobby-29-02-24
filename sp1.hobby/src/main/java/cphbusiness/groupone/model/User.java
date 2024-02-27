@@ -1,6 +1,7 @@
 package cphbusiness.groupone.model;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,10 +28,10 @@ public class User {
     @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
     private UserDetails userDetails;
 
-    @ManyToMany
+    @ManyToMany(cascade =  {CascadeType.DETACH,CascadeType.MERGE},fetch = FetchType.EAGER)
     private Set<Hobby> hobbies = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE},fetch = FetchType.EAGER)
     private Set<Hobby> hobbyInterests = new HashSet<>();
 
     public User(String username, String password, boolean is_admin) {
@@ -48,13 +49,16 @@ public class User {
         return userDetails;
     }
 
+    @Transactional
     public Hobby addHobby(Hobby hobby){
         if(hobby != null){
+            Hibernate.initialize(this.hobbies);
             this.hobbies.add(hobby);
             hobby.addUser(this);
         }
         return hobby;
     }
+    @Transactional
     Hobby addHobbyToInterests(Hobby hobby){
         if(hobby != null){
             Hibernate.initialize(this.hobbyInterests);
