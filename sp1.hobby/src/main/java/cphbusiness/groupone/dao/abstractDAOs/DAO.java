@@ -1,25 +1,20 @@
 package cphbusiness.groupone.dao.abstractDAOs;
 
-import cphbusiness.groupone.config.HibernateConfig;
 import cphbusiness.groupone.config.HobbyConfig;
 import cphbusiness.groupone.dao.IDAO;
-import cphbusiness.groupone.dao.implementations.UserDetailsDAOImpl;
-import cphbusiness.groupone.dao.implementations.ZipDAOImpl;
 import cphbusiness.groupone.model.DTO;
-import cphbusiness.groupone.model.User;
 import jakarta.persistence.EntityManagerFactory;
-import lombok.experimental.PackagePrivate;
-import org.hibernate.Hibernate;
 
 public abstract class DAO<T extends DTO<IDType>, IDType> implements IDAO<T, IDType> {
 
     static EntityManagerFactory emf;
 
     public DAO(){
-        emf = HobbyConfig.getInstance();
+        emf = HobbyConfig.getInstance(/* Ja den skal være tom, da vi skal kunne teste på den! */);
     }
 
 
+    @Override
     public void create(T in){
         if(in != null){
             try(var em = emf.createEntityManager()){
@@ -29,6 +24,8 @@ public abstract class DAO<T extends DTO<IDType>, IDType> implements IDAO<T, IDTy
             }
         }
     }
+    public abstract T read(IDType id);
+    @Override
     public T read (IDType id, Class<T> tClass) {
         try(var em = emf.createEntityManager()){
             T found = em.find(tClass,id);
@@ -39,6 +36,7 @@ public abstract class DAO<T extends DTO<IDType>, IDType> implements IDAO<T, IDTy
         return null;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public T update(T obj, IDType id){
         T toReturn = null;
@@ -54,10 +52,12 @@ public abstract class DAO<T extends DTO<IDType>, IDType> implements IDAO<T, IDTy
         }
         return toReturn;
     }
+    @Override
     public T update(T obj) {
         return update(obj, obj.getID());
     }
 
+    @Override
     public void delete(Class<T> tClass, IDType id){
         try(var em = emf.createEntityManager()){
             em.getTransaction().begin();
@@ -68,14 +68,8 @@ public abstract class DAO<T extends DTO<IDType>, IDType> implements IDAO<T, IDTy
             }
         }
     }
-
-
     static <T> Class getGenericType(T t){
-        return getType(t);
-    }
-
-    static Class<?> getType(Object o){
-        return o.getClass();
+        return t.getClass();
     }
 
 
