@@ -21,7 +21,7 @@ public class Hobby {
     @ManyToMany(mappedBy = "hobbies", fetch = FetchType.EAGER)
     private Set<User> usersSet = new HashSet<>();
 
-    @ManyToMany(mappedBy = "hobbyInterests")
+    @ManyToMany(mappedBy = "hobbyInterests",fetch = FetchType.EAGER)
     private Set<User> interestedUsers = new HashSet<>();
 
     @Column
