@@ -12,13 +12,13 @@ import java.util.Objects;
 @Entity
 @Table(name = "address")
 @NoArgsConstructor
-public class Address {
+public class Address implements DTO<String>{
 
     @Id
     private String id;
     private String street;
 
-    public Address(String street) {
+    private Address(String street) {
         this.street = street;
     }
 
@@ -30,12 +30,16 @@ public class Address {
     private Zip zip;
 
 
-    UserDetails addUserDetails(UserDetails userDetails){
+    UserDetails setUserDetails(UserDetails userDetails){
         if(userDetails != null && !Objects.equals(this.userDetails,userDetails)){
             this.userDetails = userDetails;
-            userDetails.addAddress(this);
+            userDetails.setAddress(this);
         }
         return userDetails;
     }
 
+    @Override
+    public String getID() {
+        return id;
+    }
 }

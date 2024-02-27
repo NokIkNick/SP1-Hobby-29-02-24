@@ -1,11 +1,11 @@
 package cphbusiness.groupone.dao;
 
-public interface IDAO<T>{
+public interface IDAO<T, IDType>{
     void create(T in);
 
-    T read(int id, Class<T> in);
+    T read(IDType id, Class<T> in);
 
-    T update(T obj,int id);
+    T update(T obj, IDType id);
 
-    void delete(Class<T> tClass, int id);
+    void delete(Class<T> tClass, IDType id);
 }

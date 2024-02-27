@@ -1,7 +1,6 @@
 package cphbusiness.groupone.dao.implementations;
 
 import cphbusiness.groupone.dao.abstractDAOs.ZipDAO;
-import cphbusiness.groupone.model.Zip;
 
 public class ZipDAOImpl extends ZipDAO {
 

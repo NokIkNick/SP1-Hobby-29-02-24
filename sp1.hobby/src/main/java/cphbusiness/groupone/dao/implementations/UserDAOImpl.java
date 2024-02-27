@@ -17,16 +17,4 @@ public class UserDAOImpl extends UserDAO {
     public UserDAOImpl(){
         super();
     }
-
-
-
-    @Override
-    public User update(User obj, int id) {
-        return null;
-    }
-
-    @Override
-    public void delete(Class<User> userClass, int id) {
-
-    }
 }

@@ -8,7 +8,8 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "zip")
-public class Zip {
+public class Zip implements DTO<Integer>{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -18,5 +19,8 @@ public class Zip {
     private String region_name;
     private String municipality_name;
 
-
+    @Override
+    public Integer getID() {
+        return zip;
+    }
 }

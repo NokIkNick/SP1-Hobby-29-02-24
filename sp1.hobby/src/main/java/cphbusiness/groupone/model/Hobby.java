@@ -12,16 +12,16 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity(name = "hobby")
-public class Hobby {
+public class Hobby implements DTO<Integer>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToMany(mappedBy = "hobbies", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "hobbies", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<User> usersSet = new HashSet<>();
 
-    @ManyToMany(mappedBy = "hobbyInterests")
+    @ManyToMany(mappedBy = "hobbyInterests", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<User> interestedUsers = new HashSet<>();
 
     @Column
@@ -51,4 +51,8 @@ public class Hobby {
         return user;
     }
 
+    @Override
+    public Integer getID() {
+        return id;
+    }
 }
