@@ -8,6 +8,9 @@ import cphbusiness.groupone.dao.implementations.ZipDAOImpl;
 import cphbusiness.groupone.model.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.criteria.CriteriaBuilder;
+
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,8 +20,17 @@ public class Main {
         HobbyDAOImpl hobbyDAO = HobbyDAOImpl.getInstance();
         AddressDAOImpl addressDAO = AddressDAOImpl.getInstance();
         ZipDAOImpl zipDAO = ZipDAOImpl.getInstance();
+        // US - 6
+        Map<Hobby,Integer> result = hobbyDAO.getHobbyWithCountOfInterestedPeople();
+       for (Map.Entry<Hobby,Integer> m : result.entrySet()){
+           Hobby hobby = m.getKey();
+           Integer interested = m.getValue();
+           if(interested > 0) {
+               System.out.println("Hobby " + hobby.getName() + " has " + interested + " interested people");
+           }
+       }
 
-            Hobby hobby1 = hobbyDAO.read(1, Hobby.class);
+        /*    Hobby hobby1 = hobbyDAO.read(1, Hobby.class);
             Zip zip1 = zipDAO.read(9293, Zip.class);
             boolean wasFound = true;
             User user1 = userDAO.read("Christian1234", User.class);
@@ -44,10 +56,10 @@ public class Main {
                 userDAO.create(user1);
            // em.getTransaction().commit();
 
-            /* Remember to close. */
+            *//* Remember to close. *//*
             //emf.close();
             //emf.close();
 
-        //}
+        //}*/
     }
 }
