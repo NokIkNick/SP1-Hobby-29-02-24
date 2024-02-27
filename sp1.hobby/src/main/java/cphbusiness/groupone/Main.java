@@ -32,37 +32,51 @@ public class Main {
 
 
         System.out.println(hobbyDAO.getCountOfPeopleByHobbyId(1));
+        boolean wasFound = true;
+        User user1 = userDAO.read("Christian12345");
+        if(user1 == null){
+            wasFound = false;
+            user1 = new User("Christian12345", "1234", false);
+        }
 
-         /*   Hobby hobby1 = hobbyDAO.read(1, Hobby.class);
-            Zip zip1 = zipDAO.read(9293, Zip.class);
-            boolean wasFound = true;
-            User user1 = userDAO.read("Christian1234", User.class);
-            if (user1 == null) {
-                wasFound = false;
-                user1 = new User("Christian1234", "1234", false);
-            }
+        //// if confused look at documentation of Address below
+        UserDetails user1Details = user1.getUserDetails();
+        user1Details.setAge(24);
+        user1Details.setGender(Gender.MALE);
+        user1Details.setPhone_number(4558879);
 
-            Address address1 = new Address("Lyngby Hovedgade 2");
+        Zip zip1 = zipDAO.read(9293);
 
-            UserDetails user1Details = new UserDetails();
-            user1Details.setAge(24);
-            user1Details.setGender(Gender.MALE);
-            user1Details.setPhone_number(4558879);
+        //// Wrong way of doing this: (due to working with JPA)
+        /*
+        Address address1 = new Address("Lyngby Hovedgade 2");*/
 
-            address1.setZip(zip1);
-            user1Details.addAddress(address1);
-            user1.setUserDetails(user1Details);
-            user1.addHobby(hobby1);
+        //// The Right way: (We let UserDetails create a new one if it doesn't already exist)
+        Address address1 = user1Details.getAddress();
+        address1.setStreet("Lyngby Hovedgade 2");
 
-            //em.persist(address1);
-            if (!wasFound)
-                userDAO.create(user1);
-           // em.getTransaction().commit();
+        address1.setZip(zip1);
+        user1Details.setAddress(address1);
+        user1.setUserDetails(user1Details);
 
-            *//* Remember to close. *//*
-            //emf.close();
-            //emf.close();
+        Hobby hobby1 = hobbyDAO.read(1);
+        user1.addHobby(hobby1);
 
-        //}*/
+
+        if(!wasFound)
+            userDAO.create(user1);
+        else
+            userDAO.update(user1);
+
+
+        User user2 = userDAO.read("Christian1234");
+        if(user2 == null){
+            user2 = new User("Christian1234", "1234", false);
+            userDAO.create(user2);
+        }
+        userDAO.delete(user2);
+
+        /* Remember to close. */
+        emf.close();
     }
 }

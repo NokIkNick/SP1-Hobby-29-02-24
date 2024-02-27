@@ -1,7 +1,7 @@
 package cphbusiness.groupone.model;
 
 import jakarta.persistence.*;
-import jakarta.transaction.Transactional;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +15,7 @@ import java.util.Set;
 @Setter
 @Entity(name = "users")
 @NoArgsConstructor
-public class User {
+public class User implements DTO<String> {
     @Id
     @Column(name = "username", nullable = false)
     private String username;
@@ -23,15 +23,20 @@ public class User {
     private String password;
     private boolean is_admin;
 
-
+    @Setter(AccessLevel.NONE)
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserDetails userDetails;
-
-    @ManyToMany(cascade =  {CascadeType.DETACH,CascadeType.MERGE},fetch = FetchType.EAGER)
+    public UserDetails getUserDetails(){
+        if(userDetails==null)
+            return new UserDetails();
+        return userDetails;
+    }
+  
+    @ManyToMany(cascade = {CascadeType.DETACH},fetch = FetchType.EAGER)
     @JoinTable(name = "hobbys", joinColumns = @JoinColumn(name = "username"), inverseJoinColumns = @JoinColumn(name = "hobby_id"))
     private Set<Hobby> hobbies = new HashSet<>();
 
-    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE},fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.DETACH},fetch = FetchType.EAGER)
     @JoinTable(name = "hobbyInts", joinColumns = @JoinColumn(name = "username"), inverseJoinColumns = @JoinColumn(name = "hobby_id"))
     private Set<Hobby> hobbyInterests = new HashSet<>();
 
@@ -41,6 +46,7 @@ public class User {
         this.is_admin = is_admin;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public UserDetails setUserDetails(UserDetails userDetails){
         if(userDetails != null && !Objects.equals(this.userDetails,userDetails)){
             this.userDetails = userDetails;
@@ -49,7 +55,7 @@ public class User {
         return userDetails;
     }
 
-    @Transactional
+    @SuppressWarnings("UnusedReturnValue")
     public Hobby addHobby(Hobby hobby){
         if(hobby != null && !hobbies.contains(hobby)){
             Hibernate.initialize(this.hobbies);
@@ -58,13 +64,18 @@ public class User {
         }
         return hobby;
     }
-    @Transactional
-    Hobby addHobbyToInterests(Hobby hobby){
+    @SuppressWarnings("UnusedReturnValue")
+    public Hobby addHobbyToInterests(Hobby hobby){
         if(hobby != null){
             Hibernate.initialize(this.hobbyInterests);
             this.hobbyInterests.add(hobby);
             hobby.addInterestedUser(this);
         }
         return hobby;
+    }
+
+    @Override
+    public String getID() {
+        return username;
     }
 }

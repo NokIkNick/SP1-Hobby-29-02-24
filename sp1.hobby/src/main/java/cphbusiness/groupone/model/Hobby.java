@@ -2,8 +2,7 @@ package cphbusiness.groupone.model;
 
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.Hibernate;
 
 import java.util.HashSet;
@@ -18,15 +17,16 @@ import java.util.Set;
                 @NamedQuery(name = "Hobby.countOfPeopleByHobby", query = "select size(h.usersSet) from hobby h where id = ?1"),
                 // US - 6
                 @NamedQuery(name = "Hobby.findHobbiesWithInterestCounts", query = "SELECT h, size(h.interestedUsers) FROM hobby h")
-        }
+      
 )
-public class Hobby {
+public class Hobby implements DTO<Integer>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
+    @Setter(AccessLevel.NONE)
     private Integer id;
 
-    @ManyToMany(mappedBy = "hobbies", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "hobbies", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<User> usersSet = new HashSet<>();
 
     @ManyToMany(mappedBy = "hobbyInterests",fetch = FetchType.EAGER)
@@ -40,7 +40,6 @@ public class Hobby {
     @Enumerated(EnumType.ORDINAL)
     private Type type;
 
-    @Transactional
     User addUser(User user){
         if(user != null && !usersSet.contains(user)){
             this.usersSet.add(user);
@@ -59,4 +58,8 @@ public class Hobby {
         return user;
     }
 
+    @Override
+    public Integer getID() {
+        return id;
+    }
 }

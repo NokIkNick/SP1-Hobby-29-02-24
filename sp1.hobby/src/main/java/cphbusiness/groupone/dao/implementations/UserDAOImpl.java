@@ -1,7 +1,6 @@
 package cphbusiness.groupone.dao.implementations;
 
 import cphbusiness.groupone.dao.abstractDAOs.UserDAO;
-import cphbusiness.groupone.model.User;
 
 public class UserDAOImpl extends UserDAO {
 
@@ -16,17 +15,5 @@ public class UserDAOImpl extends UserDAO {
 
     public UserDAOImpl(){
         super();
-    }
-
-
-
-    @Override
-    public User update(User obj, int id) {
-        return null;
-    }
-
-    @Override
-    public void delete(Class<User> userClass, int id) {
-
     }
 }
