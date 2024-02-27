@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 @Entity
@@ -20,12 +22,12 @@ public class UserDetails {
     @OneToOne
     @MapsId
     private User user;
-    @OneToOne(mappedBy = "userDetails")
+    @OneToOne(mappedBy = "userDetails",cascade = CascadeType.ALL)
     Address address;
 
 
 
-    User addUser(User user){
+    public User addUser(User user){
         if(user != null){
             this.user = user;
             user.addUserDetails(this);
@@ -33,8 +35,8 @@ public class UserDetails {
         return user;
     }
 
-    Address addAddress(Address address) {
-        if (address != null) {
+    public Address addAddress(Address address) {
+        if (address != null && !Objects.equals(this.address,address)) {
             this.address = address;
             address.addUserDetails(this);
         }

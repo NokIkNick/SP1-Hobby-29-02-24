@@ -19,10 +19,6 @@ public class UserDAOImpl extends UserDAO {
     }
 
 
-    @Override
-    public User read(int id, User in) {
-        return null;
-    }
 
     @Override
     public User update(User obj, int id) {

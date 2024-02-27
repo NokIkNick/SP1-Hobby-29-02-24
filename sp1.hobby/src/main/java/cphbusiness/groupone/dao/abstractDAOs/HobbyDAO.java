@@ -1,4 +1,6 @@
 package cphbusiness.groupone.dao.abstractDAOs;
 
-public abstract class HobbyDAO {
+import cphbusiness.groupone.model.Hobby;
+
+public abstract class HobbyDAO extends DAO<Hobby> {
 }

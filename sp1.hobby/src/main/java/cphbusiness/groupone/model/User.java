@@ -4,8 +4,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.Hibernate;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -37,8 +39,8 @@ public class User {
         this.is_admin = is_admin;
     }
 
-    UserDetails addUserDetails(UserDetails userDetails){
-        if(userDetails != null){
+    public UserDetails addUserDetails(UserDetails userDetails){
+        if(userDetails != null && !Objects.equals(this.userDetails,userDetails)){
             this.userDetails = userDetails;
             userDetails.addUser(this);
 
@@ -46,7 +48,7 @@ public class User {
         return userDetails;
     }
 
-    Hobby addHobby(Hobby hobby){
+    public Hobby addHobby(Hobby hobby){
         if(hobby != null){
             this.hobbies.add(hobby);
             hobby.addUser(this);
@@ -55,6 +57,7 @@ public class User {
     }
     Hobby addHobbyToInterests(Hobby hobby){
         if(hobby != null){
+            Hibernate.initialize(this.hobbyInterests);
             this.hobbyInterests.add(hobby);
             hobby.addInterestedUser(this);
         }

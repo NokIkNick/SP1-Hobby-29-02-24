@@ -6,10 +6,6 @@ import cphbusiness.groupone.model.UserDetails;
 public class UserDetailsDAOImpl extends UserDetailsDAO {
 
 
-    @Override
-    public UserDetails read(int id, UserDetails in) {
-        return null;
-    }
 
     @Override
     public UserDetails update(UserDetails obj, int id) {

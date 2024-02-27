@@ -1,8 +1,11 @@
 package cphbusiness.groupone.model;
 
+import cphbusiness.groupone.config.HibernateConfig;
+import cphbusiness.groupone.config.HobbyConfig;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.Hibernate;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -34,6 +37,13 @@ public class Hobby {
 
     User addUser(User user){
         if(user != null){
+           /* if(!Hibernate.isInitialized(this.usersSet)) {
+                try(EntityManager em = HobbyConfig.getInstance().createEntityManager()) {
+                    em.getTransaction().begin();
+                    Hibernate.initialize(this.usersSet);
+                    em.getTransaction().commit();
+                }
+            }*/
             this.usersSet.add(user);
             user.addHobby(this);
         }
@@ -42,6 +52,7 @@ public class Hobby {
 
     User addInterestedUser(User user){
         if(user != null){
+            Hibernate.initialize(this.interestedUsers);
             this.interestedUsers.add(user);
             user.addHobbyToInterests(this);
         }

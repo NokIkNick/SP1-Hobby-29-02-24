@@ -3,7 +3,7 @@ package cphbusiness.groupone.dao;
 public interface IDAO<T>{
     void create(T in);
 
-    T read(int id, T in);
+    T read(int id, Class<T> in);
 
     T update(T obj,int id);
 
