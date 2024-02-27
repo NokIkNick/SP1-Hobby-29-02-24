@@ -46,7 +46,7 @@ public class Main {
         user1.addHobby(hobby1);
 
 
-        /** Remember to close. **/
+        /* Remember to close. */
         emf.close();
         emf.close();
     }
