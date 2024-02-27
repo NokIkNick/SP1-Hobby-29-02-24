@@ -6,6 +6,9 @@ import cphbusiness.groupone.model.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         EntityManagerFactory emf = HobbyConfig.getInstance(false);
@@ -16,6 +19,7 @@ public class Main {
         ZipDAOImpl zipDAO = ZipDAOImpl.getInstance();
         UserDetailsDAOImpl userDetailsDAO = new UserDetailsDAOImpl();
 
+        List<User> users = userDAO.usersFromGivenCity("Kongerslev");
 
             /*Hobby hobby1 = hobbyDAO.read(1, Hobby.class);
             Zip zip1 = zipDAO.read(9293, Zip.class);
