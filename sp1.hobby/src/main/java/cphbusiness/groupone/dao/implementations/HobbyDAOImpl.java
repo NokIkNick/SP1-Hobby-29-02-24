@@ -4,9 +4,11 @@ import cphbusiness.groupone.dao.abstractDAOs.HobbyDAO;
 import cphbusiness.groupone.model.Hobby;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
+
 import jakarta.persistence.TypedQuery;
 
 import java.util.HashMap;
+
 import java.util.Map;
 
 public class HobbyDAOImpl extends HobbyDAO {
@@ -55,5 +57,6 @@ public class HobbyDAOImpl extends HobbyDAO {
                 return null;
             }
         }
+
     }
 }

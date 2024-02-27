@@ -30,7 +30,10 @@ public class Main {
            }
        }
 
-        /*    Hobby hobby1 = hobbyDAO.read(1, Hobby.class);
+
+        System.out.println(hobbyDAO.getCountOfPeopleByHobbyId(1));
+
+         /*   Hobby hobby1 = hobbyDAO.read(1, Hobby.class);
             Zip zip1 = zipDAO.read(9293, Zip.class);
             boolean wasFound = true;
             User user1 = userDAO.read("Christian1234", User.class);
