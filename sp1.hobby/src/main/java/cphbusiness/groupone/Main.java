@@ -17,7 +17,9 @@ public class Main {
         AddressDAOImpl addressDAO = AddressDAOImpl.getInstance();
         ZipDAOImpl zipDAO = ZipDAOImpl.getInstance();
 
-            Hobby hobby1 = hobbyDAO.read(1, Hobby.class);
+        System.out.println(hobbyDAO.getCountOfPeopleByHobbyId(1));
+
+         /*   Hobby hobby1 = hobbyDAO.read(1, Hobby.class);
             Zip zip1 = zipDAO.read(9293, Zip.class);
             boolean wasFound = true;
             User user1 = userDAO.read("Christian1234", User.class);
@@ -43,10 +45,10 @@ public class Main {
                 userDAO.create(user1);
            // em.getTransaction().commit();
 
-            /* Remember to close. */
+            *//* Remember to close. *//*
             //emf.close();
             //emf.close();
 
-        //}
+        //}*/
     }
 }

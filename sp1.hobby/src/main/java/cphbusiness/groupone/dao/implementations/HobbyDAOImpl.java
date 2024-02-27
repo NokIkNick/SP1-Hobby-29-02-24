@@ -5,6 +5,8 @@ import cphbusiness.groupone.model.Hobby;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 
+import java.util.Map;
+
 public class HobbyDAOImpl extends HobbyDAO {
 
     private static HobbyDAOImpl instance;
@@ -32,5 +34,10 @@ public class HobbyDAOImpl extends HobbyDAO {
                 return 0;
             }
         }
+    }
+
+    @Override
+    public Map<Hobby, Integer> getHobbyWithCountOfInterestedPeople() {
+        return null;
     }
 }
