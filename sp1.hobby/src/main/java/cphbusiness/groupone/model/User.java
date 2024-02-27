@@ -13,9 +13,8 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "users")
 @NoArgsConstructor
-@Table(name = "users")
 public class User {
     @Id
     @Column(name = "username", nullable = false)

@@ -1,7 +1,5 @@
 package cphbusiness.groupone.model;
 
-import cphbusiness.groupone.config.HibernateConfig;
-import cphbusiness.groupone.config.HobbyConfig;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.Getter;
@@ -9,13 +7,11 @@ import lombok.Setter;
 import org.hibernate.Hibernate;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Getter
 @Setter
-@Entity
-@Table(name = "hobby")
+@Entity(name = "hobby")
 public class Hobby {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

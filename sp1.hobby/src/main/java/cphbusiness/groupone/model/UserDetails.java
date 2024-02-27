@@ -8,8 +8,7 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@Entity
-@Table(name = "user_details")
+@Entity(name = "user_details")
 public class UserDetails {
     @Id
     private String id;
