@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.hibernate.Hibernate;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -21,7 +22,7 @@ public class Hobby {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToMany(mappedBy = "hobbies")
+    @ManyToMany(mappedBy = "hobbies", fetch = FetchType.EAGER)
     private Set<User> usersSet = new HashSet<>();
 
     @ManyToMany(mappedBy = "hobbyInterests")
@@ -37,18 +38,17 @@ public class Hobby {
 
     @Transactional
     User addUser(User user){
-        if(user != null){
-
-            Hibernate.initialize(this.usersSet);
+        if(user != null && !usersSet.contains(user)){
             this.usersSet.add(user);
             user.addHobby(this);
         }
         return user;
     }
-    @Transactional
+
     User addInterestedUser(User user){
         if(user != null){
-            Hibernate.initialize(this.interestedUsers);
+            if(!Hibernate.isInitialized(this.interestedUsers))
+                Hibernate.initialize(this.interestedUsers);
             this.interestedUsers.add(user);
             user.addHobbyToInterests(this);
         }

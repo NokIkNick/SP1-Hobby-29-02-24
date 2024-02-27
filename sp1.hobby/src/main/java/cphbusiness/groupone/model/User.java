@@ -25,7 +25,7 @@ public class User {
     private boolean is_admin;
 
 
-    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserDetails userDetails;
 
     @ManyToMany(cascade =  {CascadeType.DETACH,CascadeType.MERGE},fetch = FetchType.EAGER)
@@ -40,18 +40,17 @@ public class User {
         this.is_admin = is_admin;
     }
 
-    public UserDetails addUserDetails(UserDetails userDetails){
+    public UserDetails setUserDetails(UserDetails userDetails){
         if(userDetails != null && !Objects.equals(this.userDetails,userDetails)){
             this.userDetails = userDetails;
             userDetails.addUser(this);
-
         }
         return userDetails;
     }
 
     @Transactional
     public Hobby addHobby(Hobby hobby){
-        if(hobby != null){
+        if(hobby != null && !hobbies.contains(hobby)){
             Hibernate.initialize(this.hobbies);
             this.hobbies.add(hobby);
             hobby.addUser(this);
