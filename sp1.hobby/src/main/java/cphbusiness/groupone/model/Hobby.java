@@ -18,7 +18,10 @@ public class Hobby {
     private Integer id;
 
     @ManyToMany(mappedBy = "hobbies")
-    Set<User> usersSet = new HashSet<>();
+    private Set<User> usersSet = new HashSet<>();
+
+    @ManyToMany(mappedBy = "hobbyInterests")
+    private Set<User> interestedUsers = new HashSet<>();
 
     @Column
     private String name;
@@ -37,5 +40,12 @@ public class Hobby {
         return user;
     }
 
+    User addInterestedUser(User user){
+        if(user != null){
+            this.interestedUsers.add(user);
+            user.addHobbyToInterests(this);
+        }
+        return user;
+    }
 
 }

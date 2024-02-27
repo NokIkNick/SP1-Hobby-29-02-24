@@ -28,6 +28,9 @@ public class User {
     @ManyToMany
     private Set<Hobby> hobbies = new HashSet<>();
 
+    @ManyToMany
+    private Set<Hobby> hobbyInterests = new HashSet<>();
+
     public User(String username, String password, boolean is_admin) {
         this.username = username;
         this.password = password;
@@ -47,6 +50,13 @@ public class User {
         if(hobby != null){
             this.hobbies.add(hobby);
             hobby.addUser(this);
+        }
+        return hobby;
+    }
+    Hobby addHobbyToInterests(Hobby hobby){
+        if(hobby != null){
+            this.hobbyInterests.add(hobby);
+            hobby.addInterestedUser(this);
         }
         return hobby;
     }
