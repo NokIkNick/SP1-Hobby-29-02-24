@@ -11,13 +11,13 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity(name = "hobby")
-@NamedQueries(
-        {
-                // US - 5
-                @NamedQuery(name = "Hobby.countOfPeopleByHobby", query = "select size(h.usersSet) from hobby h where id = ?1"),
-                // US - 6
-                @NamedQuery(name = "Hobby.findHobbiesWithInterestCounts", query = "SELECT h, size(h.interestedUsers) FROM hobby h")
-      
+@NamedQueries({
+
+        // US - 5
+        @NamedQuery(name = "Hobby.countOfPeopleByHobby", query = "select size(h.usersSet) from hobby h where id = ?1"),
+        // US - 6
+        @NamedQuery(name = "Hobby.findHobbiesWithInterestCounts", query = "SELECT h, size(h.interestedUsers) FROM hobby h")
+}
 )
 public class Hobby implements DTO<Integer>{
     @Id

@@ -5,11 +5,13 @@ import cphbusiness.groupone.dao.implementations.AddressDAOImpl;
 import cphbusiness.groupone.dao.implementations.HobbyDAOImpl;
 import cphbusiness.groupone.dao.implementations.UserDAOImpl;
 import cphbusiness.groupone.dao.implementations.ZipDAOImpl;
+import cphbusiness.groupone.dto.UserUserDetailsDTO;
 import cphbusiness.groupone.model.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.criteria.CriteriaBuilder;
 
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -30,7 +32,7 @@ public class Main {
            }
        }
 
-
+        /*
         System.out.println(hobbyDAO.getCountOfPeopleByHobbyId(1));
         boolean wasFound = true;
         User user1 = userDAO.read("Christian12345");
@@ -52,7 +54,7 @@ public class Main {
         Address address1 = new Address("Lyngby Hovedgade 2");*/
 
         //// The Right way: (We let UserDetails create a new one if it doesn't already exist)
-        Address address1 = user1Details.getAddress();
+        /*Address address1 = user1Details.getAddress();
         address1.setStreet("Lyngby Hovedgade 2");
 
         address1.setZip(zip1);
@@ -75,6 +77,15 @@ public class Main {
             userDAO.create(user2);
         }
         userDAO.delete(user2);
+        */
+        //userDAO.create(new User("Coolguy","coolpassword",false));
+        User testUser = userDAO.read("Coolguy");
+        Hobby hobby2 = hobbyDAO.read(1);
+        testUser.addHobby(hobby2);
+        userDAO.update(testUser);
+        List<UserUserDetailsDTO> usersByHobbyList = userDAO.getUsersByHobby(hobby2);
+        usersByHobbyList.forEach(System.out::println);
+
 
         /* Remember to close. */
         emf.close();

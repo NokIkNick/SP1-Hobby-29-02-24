@@ -2,6 +2,8 @@ package cphbusiness.groupone.dao.abstractDAOs;
 
 import cphbusiness.groupone.model.Hobby;
 
+import java.util.Map;
+
 public abstract class HobbyDAO extends DAO<Hobby, Integer> {
     @Override
     public Hobby read(Integer id){
