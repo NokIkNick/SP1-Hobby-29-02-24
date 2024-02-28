@@ -22,7 +22,9 @@ public class Main {
         ZipDAOImpl zipDAO = ZipDAOImpl.getInstance();
         UserDetailsDAOImpl userDetailsDAO = new UserDetailsDAOImpl();
 
-        userDetailsDAO.changeGender(Gender.FEMALE,"Christian1234");
+        userDAO.create(new User("WhatACoolDude","whatAnAwesomePassword",false));
+
+        //userDetailsDAO.changeGender(Gender.FEMALE,"Christian1234");
 
 
         /*List<User> users = userDAO.usersFromGivenCity("Kongerslev");
