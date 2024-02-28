@@ -5,11 +5,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -73,7 +71,8 @@ public class User implements SuperEntity<String> {
         if(hobby != null){
             Hibernate.initialize(this.hobbyInterests);
             this.hobbyInterests.add(hobby);
-            hobby.addInterestedUser(this);
+            if(!hobby.getInterestedUsers().contains(this))
+                hobby.addInterestedUser(this);
         }
         return hobby;
     }

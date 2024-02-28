@@ -21,8 +21,11 @@ public class Main {
         AddressDAOImpl addressDAO = AddressDAOImpl.getInstance();
         ZipDAOImpl zipDAO = ZipDAOImpl.getInstance();
         UserDetailsDAOImpl userDetailsDAO = new UserDetailsDAOImpl();
-        
-        List<User> users = userDAO.usersFromGivenCity("Kongerslev");
+
+        userDetailsDAO.changeGender(Gender.FEMALE,"Christian1234");
+
+
+        /*List<User> users = userDAO.usersFromGivenCity("Kongerslev");
 
         List<Integer> phonenumbers = userDetailsDAO.getPhoneNumbersFromGivenPerson("Christian1234");
         for(Integer i : phonenumbers){
@@ -97,7 +100,7 @@ public class Main {
         */
         //userDAO.create(new User("Coolguy","coolpassword",false));
 
-        User testUser = userDAO.read("Coolguy");
+        /*User testUser = userDAO.read("Coolguy");
         if(testUser == null){
             testUser = new User("Coolguy", "stop", false);
             userDAO.create(testUser);
