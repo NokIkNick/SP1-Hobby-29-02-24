@@ -12,5 +12,7 @@ public abstract class HobbyDAO extends DAO<Hobby, Integer> {
     // US - 5
     public abstract int getCountOfPeopleByHobbyId(int id);
     // US - 6
-    public abstract Map<Hobby, Integer> getHobbyWithCountOfInterestedPeople();
+    public abstract Map<Hobby,Integer> getHobbyWithCountOfInterestedPeople();
+
+    public abstract Map<Hobby, Long> getHobbiesByPopularity(int pageNr, int pageSize);
 }

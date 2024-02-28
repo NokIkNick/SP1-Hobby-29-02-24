@@ -127,6 +127,10 @@ public class Main {
         usersByHobbyList.forEach(System.out::println);
 
 
+        Map<Hobby, Long> popularHobbies = hobbyDAO.getHobbiesByPopularity(1,10);
+        for(Map.Entry<Hobby, Long> entry : popularHobbies.entrySet()){
+            System.out.println(entry.getKey().getName() + " Number of participants:"+ entry.getValue());
+        }
         // US - 10
         Map<User,Integer> result1 = userDAO.getUsersAndHobbyCountByAddress(testAddress);
         for (Map.Entry<User,Integer> m : result1.entrySet()){

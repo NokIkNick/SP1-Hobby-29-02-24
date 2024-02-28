@@ -10,15 +10,16 @@ import java.util.Set;
 @Getter
 @Setter
 @EqualsAndHashCode
-@NamedQueries(
-        {
-                // US - 5
-                @NamedQuery(name = "Hobby.countOfPeopleByHobby", query = "select size(h.usersSet) from hobby h where h.id = ?1"),
-                // US - 6
-                @NamedQuery(name = "Hobby.findHobbiesWithInterestCounts", query = "SELECT h, size(h.interestedUsers) FROM hobby h")
-        }
-    )
 @Entity(name = "hobby")
+@NamedQueries({
+        // US - 5
+        @NamedQuery(name = "Hobby.countOfPeopleByHobby", query = "select size(h.usersSet) from hobby h where id = ?1"),
+        // US - 6
+        @NamedQuery(name = "Hobby.findHobbiesWithInterestCounts", query = "SELECT h, size(h.interestedUsers) FROM hobby h"),
+        //OPT-3
+        @NamedQuery(name="Hobby.findMostPopularHobbies", query = "SELECT h, COUNT(u) from hobby h LEFT JOIN h.usersSet u GROUP BY h ORDER BY COUNT(u) DESC")
+    }
+)
 public class Hobby implements SuperEntity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

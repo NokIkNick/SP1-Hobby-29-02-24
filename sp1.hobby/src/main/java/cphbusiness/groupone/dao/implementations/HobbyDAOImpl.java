@@ -7,9 +7,9 @@ import jakarta.persistence.Query;
 
 import jakarta.persistence.TypedQuery;
 
-import java.util.HashMap;
+import java.util.*;
 
-import java.util.Map;
+import java.util.stream.Collectors;
 
 public class HobbyDAOImpl extends HobbyDAO {
 
@@ -58,5 +58,27 @@ public class HobbyDAOImpl extends HobbyDAO {
             }
         }
 
+    }
+
+    @Override
+    public Map<Hobby, Long> getHobbiesByPopularity(int pageNr, int pageSize) {
+        Map<Hobby, Long> resultMap;
+        try(EntityManager em = emf.createEntityManager()){
+            TypedQuery<Object[]> query = em.createNamedQuery("Hobby.findMostPopularHobbies", Object[].class);
+            query.setFirstResult((pageNr - 1) * pageSize);
+            query.setMaxResults(pageSize);
+            resultMap = query.getResultList().stream().collect(Collectors.toMap(row -> (Hobby) row[0], row-> (long) row[1]));
+
+            // Sorting of map by count of users, and constructing new map
+            Map<Hobby, Long> sorted = resultMap.entrySet()
+                    .stream()
+                    .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                    .collect(Collectors.toMap(
+                            Map.Entry::getKey,
+                            Map.Entry::getValue,
+                            (oldValue,newValue) -> oldValue, //If the value is a duplicate, keep the old one.
+                            LinkedHashMap::new)); //Workaround, so that we keep the order the values are placed in the map.
+            return sorted;
+        }
     }
 }
