@@ -1,6 +1,7 @@
 package cphbusiness.groupone;
 
 import cphbusiness.groupone.config.HobbyConfig;
+
 import cphbusiness.groupone.dao.abstractDAOs.UserDetailsDAO;
 import cphbusiness.groupone.dao.implementations.*;
 import cphbusiness.groupone.dto.UserUserDetailsDTO;
@@ -12,6 +13,8 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.Map;
 
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         EntityManagerFactory emf = HobbyConfig.getInstance(false);
@@ -20,6 +23,20 @@ public class Main {
         HobbyDAOImpl hobbyDAO = HobbyDAOImpl.getInstance();
         AddressDAOImpl addressDAO = AddressDAOImpl.getInstance();
         ZipDAOImpl zipDAO = ZipDAOImpl.getInstance();
+        UserDetailsDAOImpl userDetailsDAO = new UserDetailsDAOImpl();
+
+        List<Integer> phonenumbers = userDetailsDAO.getPhoneNumbersFromGivenPerson("Christian1234");
+        for(Integer i : phonenumbers){
+            System.out.println(i);
+        }
+            /*Hobby hobby1 = hobbyDAO.read(1, Hobby.class);
+            Zip zip1 = zipDAO.read(9293, Zip.class);
+            boolean wasFound = true;
+            User user1 = userDAO.read("Christian1234", User.class);
+            if (user1 == null) {
+                wasFound = false;
+                user1 = new User("Christian1234", "1234", false);
+            }
         UserDetailsDAO userDetailsDAO = UserDetailsDAOImpl.getInstance();
 
     /*    // US - 6
