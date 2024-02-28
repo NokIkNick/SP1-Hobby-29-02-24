@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.Hibernate;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -50,6 +52,26 @@ public class User implements SuperEntity<String> {
     @ManyToMany(cascade = {CascadeType.DETACH},fetch = FetchType.EAGER)
     @JoinTable(name = "hobbyInts", joinColumns = @JoinColumn(name = "username"), inverseJoinColumns = @JoinColumn(name = "hobby_id"))
     private Set<Hobby> hobbyInterests = new HashSet<>();
+
+    @Column(name ="date_created")
+    @Temporal(TemporalType.DATE)
+    private LocalDate dateCreated;
+
+    @Column(name="last_updated")
+    @Temporal(TemporalType.DATE)
+    private LocalDate lastUpdated;
+
+
+    @PrePersist
+    private void PrePersist(){
+        dateCreated = LocalDate.now();
+        lastUpdated = dateCreated;
+    }
+
+    @PreUpdate
+    private void PreUpdate(){
+        lastUpdated = LocalDate.now();
+    }
 
     public User(String username, String password, boolean is_admin) {
         this.username = username;

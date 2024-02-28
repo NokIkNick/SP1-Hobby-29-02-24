@@ -31,10 +31,10 @@ public class HobbyDAOImpl extends HobbyDAO {
     @Override
     public int getCountOfPeopleByHobbyId(int id) {
         try(EntityManager em = super.emf.createEntityManager()){
-            Query amoutOfPeopleByHobby = em.createNamedQuery("Hobby.countOfPeopleByHobby")
+            Query amountOfPeopleByHobby = em.createNamedQuery("Hobby.countOfPeopleByHobby")
                     .setParameter(1,id);
-            if(amoutOfPeopleByHobby != null) {
-                return (int) amoutOfPeopleByHobby.getSingleResult();
+            if(amountOfPeopleByHobby != null) {
+                return (int) amountOfPeopleByHobby.getSingleResult();
             }else {
                 // logic to handle nothing found TODO
                 ExceptionLogger.log(new NoResultException("No results found").toString());
