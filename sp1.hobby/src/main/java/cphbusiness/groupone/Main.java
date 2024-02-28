@@ -20,7 +20,7 @@ public class Main {
         HobbyDAOImpl hobbyDAO = HobbyDAOImpl.getInstance();
         AddressDAOImpl addressDAO = AddressDAOImpl.getInstance();
         ZipDAOImpl zipDAO = ZipDAOImpl.getInstance();
-        // US - 6
+    /*    // US - 6
         Map<Hobby,Integer> result = hobbyDAO.getHobbyWithCountOfInterestedPeople();
        for (Map.Entry<Hobby,Integer> m : result.entrySet()){
            Hobby hobby = m.getKey();
@@ -28,8 +28,8 @@ public class Main {
            if(interested > 0) {
                System.out.println("Hobby " + hobby.getName() + " has " + interested + " interested people");
            }
-       }
-
+       }*/
+       /////////
 
         System.out.println(hobbyDAO.getCountOfPeopleByHobbyId(1));
         boolean wasFound = true;
@@ -56,7 +56,7 @@ public class Main {
         address1.setStreet("Lyngby Hovedgade 2");
 
         address1.setZip(zip1);
-        user1Details.setAddress(address1);
+        //user1Details.setAddress(address1);
         user1.setUserDetails(user1Details);
 
         Hobby hobby1 = hobbyDAO.read(1);
@@ -75,6 +75,16 @@ public class Main {
             userDAO.create(user2);
         }
         userDAO.delete(user2);
+
+        // US - 10
+        Map<User,Integer> result1 = userDAO.getUsersAndHobbyCountByAddress(address1);
+        for (Map.Entry<User,Integer> m : result1.entrySet()){
+            User user = m.getKey();
+            Integer hobbyCount = m.getValue();
+            if(hobbyCount > 0) {
+                System.out.println("User " + user.getUsername() + " has " + hobbyCount + " hobbies");
+            }
+        }
 
         /* Remember to close. */
         emf.close();
