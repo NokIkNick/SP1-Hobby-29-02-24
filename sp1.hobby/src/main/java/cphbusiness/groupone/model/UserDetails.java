@@ -18,7 +18,6 @@ public class UserDetails implements SuperEntity<String> {
     public String getID() {
         return id;
     }
-
     @Id
     @Setter(AccessLevel.NONE)
     private String id;

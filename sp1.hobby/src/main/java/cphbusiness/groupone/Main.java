@@ -13,8 +13,6 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.Map;
 
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
         EntityManagerFactory emf = HobbyConfig.getInstance(false);
@@ -24,11 +22,14 @@ public class Main {
         AddressDAOImpl addressDAO = AddressDAOImpl.getInstance();
         ZipDAOImpl zipDAO = ZipDAOImpl.getInstance();
         UserDetailsDAOImpl userDetailsDAO = new UserDetailsDAOImpl();
+        
+        List<User> users = userDAO.usersFromGivenCity("Kongerslev");
 
         List<Integer> phonenumbers = userDetailsDAO.getPhoneNumbersFromGivenPerson("Christian1234");
         for(Integer i : phonenumbers){
             System.out.println(i);
         }
+        
             /*Hobby hobby1 = hobbyDAO.read(1, Hobby.class);
             Zip zip1 = zipDAO.read(9293, Zip.class);
             boolean wasFound = true;
@@ -86,9 +87,8 @@ public class Main {
         if(!wasFound)
             userDAO.create(user1);
         else
-            userDAO.update(user1);
-
-
+            userDAO.update(user1)
+            
         User user2 = userDAO.read("Christian1234");
         if(user2 == null){
             user2 = new User("Christian1234", "1234", false);

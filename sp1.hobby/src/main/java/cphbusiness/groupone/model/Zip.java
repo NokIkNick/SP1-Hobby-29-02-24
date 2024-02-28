@@ -8,8 +8,8 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "zip")
-public class Zip implements SuperEntity<Integer> {
 
+public class Zip implements SuperEntity<Integer> {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY) //// We need to be able to set the zipcode, not autogenerate it, we don't have that luxury
     @Column(name = "id", nullable = false)
