@@ -34,8 +34,10 @@ public class User implements SuperEntity<String> {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserDetails userDetails;
     public UserDetails getUserDetails(){
-        if(userDetails==null)
-            return new UserDetails();
+        if(userDetails==null) {
+            userDetails = new UserDetails();
+            userDetails.setUser(this);
+        }
         return userDetails;
     }
   
@@ -51,15 +53,6 @@ public class User implements SuperEntity<String> {
         this.username = username;
         this.password = password;
         this.is_admin = is_admin;
-    }
-
-    @SuppressWarnings("UnusedReturnValue")
-    public UserDetails setUserDetails(UserDetails userDetails){
-        if(userDetails != null && !Objects.equals(this.userDetails,userDetails)){
-            this.userDetails = userDetails;
-            userDetails.addUser(this);
-        }
-        return userDetails;
     }
 
     @SuppressWarnings("UnusedReturnValue")

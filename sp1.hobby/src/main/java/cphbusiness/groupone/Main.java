@@ -22,14 +22,14 @@ public class Main {
         ZipDAOImpl zipDAO = ZipDAOImpl.getInstance();
         UserDetailsDAO userDetailsDAO = UserDetailsDAOImpl.getInstance();
         // US - 6
-        Map<Hobby,Integer> result = hobbyDAO.getHobbyWithCountOfInterestedPeople();
-       for (Map.Entry<Hobby,Integer> m : result.entrySet()){
-           Hobby hobby = m.getKey();
-           Integer interested = m.getValue();
-           if(interested > 0) {
-               System.out.println("Hobby " + hobby.getName() + " has " + interested + " interested people");
-           }
-       }
+        Map<Hobby, Integer> result = hobbyDAO.getHobbyWithCountOfInterestedPeople();
+        for (Map.Entry<Hobby, Integer> m : result.entrySet()) {
+            Hobby hobby = m.getKey();
+            Integer interested = m.getValue();
+            if (interested > 0) {
+                System.out.println("Hobby " + hobby.getName() + " has " + interested + " interested people");
+            }
+        }
 
         /*
         System.out.println(hobbyDAO.getCountOfPeopleByHobbyId(1));
@@ -80,21 +80,22 @@ public class Main {
         //userDAO.create(new User("Coolguy","coolpassword",false));
 
         User testUser = userDAO.read("Coolguy");
+        if(testUser == null){
+            testUser = new User("Coolguy", "stop", false);
+            userDAO.create(testUser);
+        }
         Hobby hobby2 = hobbyDAO.read(1);
         UserDetails userDetails1 = testUser.getUserDetails();
-        if(userDetails1 == null){
-            userDetails1 = new UserDetails();
-        }
         userDetails1.setAge(22);
         userDetails1.setGender(Gender.MALE);
 
         Address testAddress = userDetails1.getAddress();
-        if(testAddress == null){
+        if (testAddress == null) {
             testAddress = new Address();
         }
         Zip testZip = testAddress.getZip();
 
-        if(testZip == null){
+        if (testZip == null) {
             testZip = zipDAO.read(2700);
         }
 
