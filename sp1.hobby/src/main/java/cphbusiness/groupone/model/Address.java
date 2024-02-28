@@ -10,10 +10,10 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@Entity
+@jakarta.persistence.Entity
 @Table(name = "address")
 @NoArgsConstructor
-public class Address implements DTO<String>{
+public class Address implements Entity<String> {
 
     @Id
     @Setter(AccessLevel.NONE)

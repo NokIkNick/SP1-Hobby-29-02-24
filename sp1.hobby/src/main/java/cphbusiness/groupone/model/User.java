@@ -13,9 +13,9 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Entity(name = "users")
+@jakarta.persistence.Entity(name = "users")
 @NoArgsConstructor
-public class User implements DTO<String> {
+public class User implements Entity<String> {
     @Id
     @Column(name = "username", nullable = false)
     private String username;

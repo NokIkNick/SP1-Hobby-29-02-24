@@ -1,5 +1,5 @@
 package cphbusiness.groupone.model;
 
-public interface DTO<IDType> {
+public interface Entity<IDType> {
     IDType getID();
 }

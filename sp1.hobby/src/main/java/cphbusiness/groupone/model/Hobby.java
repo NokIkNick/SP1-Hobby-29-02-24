@@ -1,7 +1,6 @@
 package cphbusiness.groupone.model;
 
 import jakarta.persistence.*;
-import jakarta.transaction.Transactional;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -10,7 +9,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Entity(name = "hobby")
+@jakarta.persistence.Entity(name = "hobby")
 @NamedQueries(
         {
                 // US - 5
@@ -19,7 +18,7 @@ import java.util.Set;
                 @NamedQuery(name = "Hobby.findHobbiesWithInterestCounts", query = "SELECT h, size(h.interestedUsers) FROM hobby h")
       
 )
-public class Hobby implements DTO<Integer>{
+public class Hobby implements Entity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
