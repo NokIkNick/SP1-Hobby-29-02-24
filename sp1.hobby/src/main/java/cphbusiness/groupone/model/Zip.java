@@ -6,9 +6,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
+@jakarta.persistence.Entity
 @Table(name = "zip")
-public class Zip implements DTO<Integer>{
+public class Zip implements Entity<Integer> {
 
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY) //// We need to be able to set the zipcode, not autogenerate it, we don't have that luxury

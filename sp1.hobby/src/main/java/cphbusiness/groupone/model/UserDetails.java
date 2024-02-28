@@ -11,8 +11,9 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity(name = "user_details")
-public class UserDetails implements DTO<String>{
+@jakarta.persistence.Entity(name = "user_details")
+public class UserDetails implements Entity<String> {
+
     @Override
     public String getID() {
         return id;

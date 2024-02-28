@@ -2,10 +2,10 @@ package cphbusiness.groupone.dao.abstractDAOs;
 
 import cphbusiness.groupone.config.HobbyConfig;
 import cphbusiness.groupone.dao.IDAO;
-import cphbusiness.groupone.model.DTO;
+import cphbusiness.groupone.model.Entity;
 import jakarta.persistence.EntityManagerFactory;
 
-public abstract class DAO<T extends DTO<IDType>, IDType> implements IDAO<T, IDType> {
+public abstract class DAO<T extends Entity<IDType>, IDType> implements IDAO<T, IDType> {
 
     protected static EntityManagerFactory emf;
 
