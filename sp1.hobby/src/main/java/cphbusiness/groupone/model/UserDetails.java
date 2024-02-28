@@ -67,6 +67,7 @@ public class UserDetails implements SuperEntity<String> {
     public Address getAddress() {
         if (this.address == null) {
             this.address = new Address();
+            this.address.setUserDetails(this);
         }
         return this.address;
     }
