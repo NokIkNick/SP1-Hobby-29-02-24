@@ -33,16 +33,16 @@ public class UserDAOImpl extends UserDAO {
 
     // US - 10
     public Map<User,Integer> getUsersAndHobbyCountByAddress(Address address){
-        try(EntityManager em = super.emf.createEntityManager()){
+        try(EntityManager em = emf.createEntityManager()){
             TypedQuery<Object[]>  mapQuery = em.createNamedQuery("User.usersAndHobbyCountByAddress",Object[].class)
                     .setParameter(1,address.getStreet());
             if(mapQuery != null){
                 // Solution without using a stream
-                /*Map<User,Integer> userIntegerMap = new HashMap<>();
+                /*Map<User,Integer> userHobbyCountMap = new HashMap<>();
                 for (Object[] result : mapQuery.getResultList()){
                     User user = (User) result[0];
                     Integer hobbyCount = (Integer) result[1];
-                    userIntegerMap.put(user,hobbyCount);
+                    userHobbyCountMap.put(user,hobbyCount);
                 }*/
                 // solution with a steam as required.
                 List<Object[]> objectList = mapQuery.getResultList();
@@ -51,7 +51,7 @@ public class UserDAOImpl extends UserDAO {
                                 x -> (User) x[0],
                                 x -> (Integer) x[1])
                                 );
-                return /*userIntegerMap*/ userHobbyCountMap;
+                return userHobbyCountMap;
             }else {
                 // add logic to handle no information found. TODO
                 return null;

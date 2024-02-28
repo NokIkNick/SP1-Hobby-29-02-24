@@ -107,7 +107,7 @@ public class Main {
         userDetails1.setAddress(testAddress);
         testAddress.setUserDetails(userDetails1);
         userDetails1.setPhone_number(42212345);
-        testUser.setUserDetails(userDetails1);
+
         testUser.addHobby(hobby2);
         userDAO.update(testUser);
         List<UserUserDetailsDTO> usersByHobbyList = userDAO.getUsersByHobby(hobby2);
@@ -115,7 +115,7 @@ public class Main {
 
 
         // US - 10
-        Map<User,Integer> result1 = userDAO.getUsersAndHobbyCountByAddress(address1);
+        Map<User,Integer> result1 = userDAO.getUsersAndHobbyCountByAddress(testAddress);
         for (Map.Entry<User,Integer> m : result1.entrySet()){
             User user = m.getKey();
             Integer hobbyCount = m.getValue();
