@@ -1,8 +1,10 @@
 package cphbusiness.groupone.dao.implementations;
 
 import cphbusiness.groupone.dao.abstractDAOs.AddressDAO;
-import cphbusiness.groupone.model.Address;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AddressDAOImpl extends AddressDAO {
     private static AddressDAOImpl instance;
 

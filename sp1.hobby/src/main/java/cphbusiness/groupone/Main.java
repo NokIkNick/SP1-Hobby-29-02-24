@@ -1,38 +1,35 @@
 package cphbusiness.groupone;
 
 import cphbusiness.groupone.config.HobbyConfig;
-<<<<<<< Updated upstream
+
+import cphbusiness.groupone.dao.abstractDAOs.UserDetailsDAO;
 import cphbusiness.groupone.dao.implementations.*;
-=======
-import cphbusiness.groupone.dao.IDAO;
-import cphbusiness.groupone.dao.implementations.HobbyDAOImpl;
-import cphbusiness.groupone.dao.implementations.UserDAOImpl;
->>>>>>> Stashed changes
+import cphbusiness.groupone.dto.UserUserDetailsDTO;
 import cphbusiness.groupone.model.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.criteria.CriteriaBuilder;
 
-<<<<<<< Updated upstream
-import java.util.ArrayList;
 import java.util.List;
-=======
-import java.util.List;
-import java.util.Set;
->>>>>>> Stashed changes
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
         EntityManagerFactory emf = HobbyConfig.getInstance(false);
 
-<<<<<<< Updated upstream
         UserDAOImpl userDAO = UserDAOImpl.getInstance();
         HobbyDAOImpl hobbyDAO = HobbyDAOImpl.getInstance();
         AddressDAOImpl addressDAO = AddressDAOImpl.getInstance();
         ZipDAOImpl zipDAO = ZipDAOImpl.getInstance();
         UserDetailsDAOImpl userDetailsDAO = new UserDetailsDAOImpl();
-
+        
         List<User> users = userDAO.usersFromGivenCity("Kongerslev");
 
+        List<Integer> phonenumbers = userDetailsDAO.getPhoneNumbersFromGivenPerson("Christian1234");
+        for(Integer i : phonenumbers){
+            System.out.println(i);
+        }
+        
             /*Hobby hobby1 = hobbyDAO.read(1, Hobby.class);
             Zip zip1 = zipDAO.read(9293, Zip.class);
             boolean wasFound = true;
@@ -41,31 +38,106 @@ public class Main {
                 wasFound = false;
                 user1 = new User("Christian1234", "1234", false);
             }
+        UserDetailsDAO userDetailsDAO = UserDetailsDAOImpl.getInstance();
 
-            Address address1 = new Address("Lyngby Hovedgade 2");
+    /*    // US - 6
+        Map<Hobby,Integer> result = hobbyDAO.getHobbyWithCountOfInterestedPeople();
+       for (Map.Entry<Hobby,Integer> m : result.entrySet()){
+           Hobby hobby = m.getKey();
+           Integer interested = m.getValue();
+           if(interested > 0) {
+               System.out.println("Hobby " + hobby.getName() + " has " + interested + " interested people");
+           }
+       }*/
+       /////////
 
-            UserDetails user1Details = new UserDetails();
-            user1Details.setAge(24);
-            user1Details.setGender(Gender.MALE);
-            user1Details.setPhone_number(4558879);
+        /*
+        System.out.println(hobbyDAO.getCountOfPeopleByHobbyId(1));
+        boolean wasFound = true;
+        User user1 = userDAO.read("Christian12345");
+        if(user1 == null){
+            wasFound = false;
+            user1 = new User("Christian12345", "1234", false);
+        }
 
-            address1.setZip(zip1);
-            user1Details.addAddress(address1);
-            user1.setUserDetails(user1Details);
-            user1.addHobby(hobby1);
+        //// if confused look at documentation of Address below
+        UserDetails user1Details = user1.getUserDetails();
+        user1Details.setAge(24);
+        user1Details.setGender(Gender.MALE);
+        user1Details.setPhone_number(4558879);
 
-            //em.persist(address1);
-            if (!wasFound)
-                userDAO.create(user1);
-           // em.getTransaction().commit();
+        Zip zip1 = zipDAO.read(9293);
 
-            /* Remember to close. */
-            //emf.close();
-            //emf.close();
+        //// Wrong way of doing this: (due to working with JPA)
+        /*
+        Address address1 = new Address("Lyngby Hovedgade 2");*/
 
-        //}
-=======
+        //// The Right way: (We let UserDetails create a new one if it doesn't already exist)
+        /*Address address1 = user1Details.getAddress();
+        address1.setStreet("Lyngby Hovedgade 2");
+
+        address1.setZip(zip1);
+        //user1Details.setAddress(address1);
+        user1.setUserDetails(user1Details);
+
+        Hobby hobby1 = hobbyDAO.read(1);
+        user1.addHobby(hobby1);
+
+
+        if(!wasFound)
+            userDAO.create(user1);
+        else
+            userDAO.update(user1)
+            
+        User user2 = userDAO.read("Christian1234");
+        if(user2 == null){
+            user2 = new User("Christian1234", "1234", false);
+            userDAO.create(user2);
+        }
+        userDAO.delete(user2);
+        */
+        //userDAO.create(new User("Coolguy","coolpassword",false));
+
+        User testUser = userDAO.read("Coolguy");
+        if(testUser == null){
+            testUser = new User("Coolguy", "stop", false);
+            userDAO.create(testUser);
+        }
+        Hobby hobby2 = hobbyDAO.read(1);
+        UserDetails userDetails1 = testUser.getUserDetails();
+        userDetails1.setAge(22);
+        userDetails1.setGender(Gender.MALE);
+
+        Address testAddress = userDetails1.getAddress();
+        Zip testZip = testAddress.getZip();
+
+        if (testZip == null) {
+            testZip = zipDAO.read(2700);
+        }
+
+
+        testAddress.setZip(testZip);
+        testAddress.setStreet("Bellahøjvej 31");
+        testAddress.setUserDetails(userDetails1);
+        userDetails1.setPhone_number(42212345);
         
->>>>>>> Stashed changes
+        testUser.addHobby(hobby2);
+        userDAO.update(testUser);
+        List<UserUserDetailsDTO> usersByHobbyList = userDAO.getUsersByHobby(hobby2);
+        usersByHobbyList.forEach(System.out::println);
+
+
+        // US - 10
+        Map<User,Integer> result1 = userDAO.getUsersAndHobbyCountByAddress(testAddress);
+        for (Map.Entry<User,Integer> m : result1.entrySet()){
+            User user = m.getKey();
+            Integer hobbyCount = m.getValue();
+            if(hobbyCount > 0) {
+                System.out.println("User " + user.getUsername() + " has " + hobbyCount + " hobbies");
+            }
+        }
+
+        /* Remember to close. */
+        emf.close();
     }
 }
