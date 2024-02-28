@@ -11,6 +11,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import cphbusiness.groupone.dto.UserUserDetailsDTO;
+import cphbusiness.groupone.model.Hobby;
+import jakarta.persistence.TypedQuery;
+
+import java.util.List;
 
 public class UserDAOImpl extends UserDAO {
 
@@ -52,5 +57,19 @@ public class UserDAOImpl extends UserDAO {
                 return null;
             }
         }
+    }
+
+    @Override
+    public List<UserUserDetailsDTO> getUsersByHobby(Hobby hobby) {
+        if(hobby != null){
+            try(var em = emf.createEntityManager()){
+                em.getTransaction().begin();
+                TypedQuery<UserUserDetailsDTO> query = em.createNamedQuery("User.getUsersByHobby", UserUserDetailsDTO.class);
+                query.setParameter("value",hobby);
+                em.getTransaction().commit();
+                return query.getResultList();
+            }
+        }
+        return null;
     }
 }
