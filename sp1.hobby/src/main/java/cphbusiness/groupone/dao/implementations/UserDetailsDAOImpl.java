@@ -11,16 +11,13 @@ import java.util.List;
 
 public class UserDetailsDAOImpl extends UserDetailsDAO {
 
+    private static UserDetailsDAOImpl instance;
 
-
-    @Override
-    public UserDetails update(UserDetails obj, int id) {
-        return null;
-    }
-
-    @Override
-    public void delete(Class<UserDetails> userDetailsClass, int id) {
-
+    public static UserDetailsDAOImpl getInstance(){
+        if(instance == null){
+            instance = new UserDetailsDAOImpl();
+        }
+        return instance;
     }
 
     public List<Integer> getPhoneNumbersFromGivenPerson(String username){

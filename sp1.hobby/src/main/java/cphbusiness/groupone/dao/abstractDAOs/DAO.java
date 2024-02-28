@@ -1,31 +1,32 @@
 package cphbusiness.groupone.dao.abstractDAOs;
 
-import cphbusiness.groupone.config.HibernateConfig;
 import cphbusiness.groupone.config.HobbyConfig;
 import cphbusiness.groupone.dao.IDAO;
-import cphbusiness.groupone.model.User;
+import cphbusiness.groupone.model.SuperEntity;
 import jakarta.persistence.EntityManagerFactory;
-import org.hibernate.Hibernate;
 
-public abstract class DAO <T> implements IDAO<T> {
+public abstract class DAO<T extends SuperEntity<IDType>, IDType> implements IDAO<T, IDType> {
 
-    private static EntityManagerFactory emf;
+    protected static EntityManagerFactory emf;
 
     public DAO(){
-        emf = HobbyConfig.getInstance(false);
+        emf = HobbyConfig.getInstance(/* Ja den skal være tom, da vi skal kunne teste på den! */);
     }
 
 
+    @Override
     public void create(T in){
-        try(var em = emf.createEntityManager()){
-            em.getTransaction().begin();
-            if(in != null){
+        if(in != null){
+            try(var em = emf.createEntityManager()){
+                em.getTransaction().begin();
                 em.persist(in);
                 em.getTransaction().commit();
             }
         }
     }
-    public T read (String id, Class<T> tClass) {
+    public abstract T read(IDType id);
+    @Override
+    public T read (IDType id, Class<T> tClass) {
         try(var em = emf.createEntityManager()){
             T found = em.find(tClass,id);
             if(found != null){
@@ -35,33 +36,8 @@ public abstract class DAO <T> implements IDAO<T> {
         return null;
     }
 
-    public T read (int id, Class<T> tClass) {
-        try(var em = emf.createEntityManager()){
-            T found = em.find(tClass,id);
-            if(found != null){
-                return found;
-            }
-        }
-        return null;
-    }
-
-    @SuppressWarnings("unchecked")
-    public T update(T obj, String id){
-        T toReturn = null;
-        if(obj != null){
-            try(var em = emf.createEntityManager()){
-                em.getTransaction().begin();
-                Object found = em.find(getGenericType(obj), id);
-                if(found != null){
-                   toReturn = em.merge(obj);
-                   em.getTransaction().commit();
-                }
-            }
-        }
-        return toReturn;
-    }
-
-    public T update(T obj, int id){
+    @Override
+    public T update(T obj, IDType id){
         T toReturn = null;
         if(obj != null){
             try(var em = emf.createEntityManager()){
@@ -75,8 +51,12 @@ public abstract class DAO <T> implements IDAO<T> {
         }
         return toReturn;
     }
+    @Override
+    public T update(T obj) {
+        return update(obj, obj.getID());
+    }
 
-    public void delete(Class<T> tClass,String id){
+    public void delete(Class<T> tClass, IDType id){
         try(var em = emf.createEntityManager()){
             em.getTransaction().begin();
             Object found = em.find(tClass,id);
@@ -87,24 +67,13 @@ public abstract class DAO <T> implements IDAO<T> {
         }
     }
 
-    public void delete(Class<T> tClass,int id){
-        try(var em = emf.createEntityManager()){
-            em.getTransaction().begin();
-            Object found = em.find(tClass,id);
-            if(found != null){
-                em.remove(found);
-                em.getTransaction().commit();
-            }
-        }
+    public void delete(T t){
+        delete(getGenericType(t), t.getID());
     }
 
-
-    static <T> Class getGenericType(T t){
-        return getType(t);
-    }
-
-    static Class<?> getType(Object o){
-        return o.getClass();
+    @SuppressWarnings("unchecked")
+    static <T> Class<T> getGenericType(T t){
+        return (Class<T>) t.getClass();
     }
 
 

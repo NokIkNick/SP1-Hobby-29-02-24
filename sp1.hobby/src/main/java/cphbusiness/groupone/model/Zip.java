@@ -8,9 +8,10 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "zip")
-public class Zip {
+public class Zip implements SuperEntity<Integer> {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY) //// We need to be able to set the zipcode, not autogenerate it, we don't have that luxury
     @Column(name = "id", nullable = false)
     private Integer zip;
 
@@ -18,5 +19,8 @@ public class Zip {
     private String region_name;
     private String municipality_name;
 
-
+    @Override
+    public Integer getID() {
+        return zip;
+    }
 }
