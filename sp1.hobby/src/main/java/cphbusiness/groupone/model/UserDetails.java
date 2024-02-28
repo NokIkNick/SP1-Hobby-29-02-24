@@ -11,8 +11,8 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-@jakarta.persistence.Entity(name = "user_details")
-public class UserDetails implements Entity<String> {
+@Entity(name = "user_details")
+public class UserDetails implements SuperEntity<String> {
 
     @Override
     public String getID() {
@@ -34,14 +34,6 @@ public class UserDetails implements Entity<String> {
 
     @OneToOne(mappedBy = "userDetails",cascade = CascadeType.ALL)
     Address address;
-
-
-    public UserDetails(int age, Gender gender, int phone_number, Address address) {
-        this.age = age;
-        this.gender = gender;
-        this.phone_number = phone_number;
-        this.address = address;
-    }
 
     @SuppressWarnings("UnusedReturnValue")
     public User addUser(User user){

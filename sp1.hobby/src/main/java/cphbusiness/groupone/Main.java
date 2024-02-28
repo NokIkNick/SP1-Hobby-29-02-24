@@ -82,21 +82,22 @@ public class Main {
         //userDAO.create(new User("Coolguy","coolpassword",false));
 
         User testUser = userDAO.read("Coolguy");
+        if(testUser == null){
+            testUser = new User("Coolguy", "stop", false);
+            userDAO.create(testUser);
+        }
         Hobby hobby2 = hobbyDAO.read(1);
         UserDetails userDetails1 = testUser.getUserDetails();
-        if(userDetails1 == null){
-            userDetails1 = new UserDetails();
-        }
         userDetails1.setAge(22);
         userDetails1.setGender(Gender.MALE);
 
         Address testAddress = userDetails1.getAddress();
-        if(testAddress == null){
+        if (testAddress == null) {
             testAddress = new Address();
         }
         Zip testZip = testAddress.getZip();
 
-        if(testZip == null){
+        if (testZip == null) {
             testZip = zipDAO.read(2700);
         }
 

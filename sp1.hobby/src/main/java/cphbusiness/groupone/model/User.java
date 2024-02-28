@@ -13,7 +13,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-@jakarta.persistence.Entity(name = "users")
+@Entity(name = "users")
 @NoArgsConstructor
 @NamedQueries(
         {
@@ -24,7 +24,7 @@ import java.util.Set;
         }
 )
 
-public class User implements Entity<String> {
+public class User implements SuperEntity<String> {
 
     @Id
     @Column(name = "username", nullable = false)
@@ -37,8 +37,10 @@ public class User implements Entity<String> {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserDetails userDetails;
     public UserDetails getUserDetails(){
-        if(userDetails==null)
-            return new UserDetails();
+        if(userDetails==null) {
+            userDetails = new UserDetails();
+            userDetails.setUser(this);
+        }
         return userDetails;
     }
   
@@ -54,15 +56,6 @@ public class User implements Entity<String> {
         this.username = username;
         this.password = password;
         this.is_admin = is_admin;
-    }
-
-    @SuppressWarnings("UnusedReturnValue")
-    public UserDetails setUserDetails(UserDetails userDetails){
-        if(userDetails != null && !Objects.equals(this.userDetails,userDetails)){
-            this.userDetails = userDetails;
-            userDetails.addUser(this);
-        }
-        return userDetails;
     }
 
     @SuppressWarnings("UnusedReturnValue")

@@ -10,10 +10,10 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@jakarta.persistence.Entity
+@Entity
 @Table(name = "address")
 @NoArgsConstructor
-public class Address implements Entity<String> {
+public class Address implements SuperEntity<String> {
 
     @Id
     @Setter(AccessLevel.NONE)
@@ -26,12 +26,6 @@ public class Address implements Entity<String> {
 
     @ManyToOne
     private Zip zip;
-
-
-    public Address(String street, Zip zip) {
-        this.street = street;
-        this.zip = zip;
-    }
 
     public UserDetails setUserDetails(UserDetails userDetails){
         if(userDetails != null && !Objects.equals(this.userDetails,userDetails)){
