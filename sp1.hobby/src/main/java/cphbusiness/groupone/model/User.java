@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import java.util.HashSet;
@@ -13,15 +14,18 @@ import java.util.Set;
 
 @Getter
 @Setter
-@jakarta.persistence.Entity(name = "users")
+@Entity(name = "users")
 @NoArgsConstructor
+@NamedQueries(
+        {
+                // US - 10
+                @NamedQuery(name = "User.usersAndHobbyCountByAddress", query = "select u, size(u.hobbies) from users u where u.userDetails.address.street = ?1"),
+                //US: 3
+                @NamedQuery(name="User.getUsersByHobby", query = "select new cphbusiness.groupone.dto.UserUserDetailsDTO(u.username, us) from cphbusiness.groupone.model.User u join cphbusiness.groupone.model.UserDetails us on us.user.id = u.id where :value member of u.hobbies")
+        }
+)
 
-@NamedQueries({
-        //US: 3
-        @NamedQuery(name="User.getUsersByHobby", query = "select new cphbusiness.groupone.dto.UserUserDetailsDTO(u.username, us) from cphbusiness.groupone.model.User u join cphbusiness.groupone.model.UserDetails us on us.user.id = u.id where :value member of u.hobbies")
-})
-
-public class User implements Entity<String> {
+public class User implements SuperEntity<String> {
 
     @Id
     @Column(name = "username", nullable = false)
@@ -34,8 +38,10 @@ public class User implements Entity<String> {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserDetails userDetails;
     public UserDetails getUserDetails(){
-        if(userDetails==null)
-            return new UserDetails();
+        if(userDetails==null) {
+            userDetails = new UserDetails();
+            userDetails.setUser(this);
+        }
         return userDetails;
     }
   
@@ -51,15 +57,6 @@ public class User implements Entity<String> {
         this.username = username;
         this.password = password;
         this.is_admin = is_admin;
-    }
-
-    @SuppressWarnings("UnusedReturnValue")
-    public UserDetails setUserDetails(UserDetails userDetails){
-        if(userDetails != null && !Objects.equals(this.userDetails,userDetails)){
-            this.userDetails = userDetails;
-            userDetails.addUser(this);
-        }
-        return userDetails;
     }
 
     @SuppressWarnings("UnusedReturnValue")

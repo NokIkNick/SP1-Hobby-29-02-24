@@ -6,10 +6,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@jakarta.persistence.Entity
+@Entity
 @Table(name = "zip")
-public class Zip implements Entity<Integer> {
 
+public class Zip implements SuperEntity<Integer> {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY) //// We need to be able to set the zipcode, not autogenerate it, we don't have that luxury
     @Column(name = "id", nullable = false)

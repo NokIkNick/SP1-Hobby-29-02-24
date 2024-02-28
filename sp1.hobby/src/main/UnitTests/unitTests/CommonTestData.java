@@ -14,10 +14,12 @@ class CommonTestData {
     public static EntityManagerFactory emf;
     public static int hobby1id;
     public static int hobby2id;
+
     private static void commonSetup(){
         if(emf == null)
             emf = HobbyConfig.getInstance(true);
     }
+
     static void setupHobbies(){
         commonSetup();
         //// okay to do this since it's guaranteed to not be in the test database, as it's empty
@@ -57,6 +59,5 @@ class CommonTestData {
         z.setRegion_name(region);
         z.setMunicipality_name(municipality);
     }
-
 
 }

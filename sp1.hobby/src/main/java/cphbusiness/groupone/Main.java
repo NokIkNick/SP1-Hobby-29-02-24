@@ -1,6 +1,7 @@
 package cphbusiness.groupone;
 
 import cphbusiness.groupone.config.HobbyConfig;
+
 import cphbusiness.groupone.dao.abstractDAOs.UserDetailsDAO;
 import cphbusiness.groupone.dao.implementations.*;
 import cphbusiness.groupone.dto.UserUserDetailsDTO;
@@ -20,8 +21,26 @@ public class Main {
         HobbyDAOImpl hobbyDAO = HobbyDAOImpl.getInstance();
         AddressDAOImpl addressDAO = AddressDAOImpl.getInstance();
         ZipDAOImpl zipDAO = ZipDAOImpl.getInstance();
+        UserDetailsDAOImpl userDetailsDAO = new UserDetailsDAOImpl();
+        
+        List<User> users = userDAO.usersFromGivenCity("Kongerslev");
+
+        List<Integer> phonenumbers = userDetailsDAO.getPhoneNumbersFromGivenPerson("Christian1234");
+        for(Integer i : phonenumbers){
+            System.out.println(i);
+        }
+        
+            /*Hobby hobby1 = hobbyDAO.read(1, Hobby.class);
+            Zip zip1 = zipDAO.read(9293, Zip.class);
+            boolean wasFound = true;
+            User user1 = userDAO.read("Christian1234", User.class);
+            if (user1 == null) {
+                wasFound = false;
+                user1 = new User("Christian1234", "1234", false);
+            }
         UserDetailsDAO userDetailsDAO = UserDetailsDAOImpl.getInstance();
-        // US - 6
+
+    /*    // US - 6
         Map<Hobby,Integer> result = hobbyDAO.getHobbyWithCountOfInterestedPeople();
        for (Map.Entry<Hobby,Integer> m : result.entrySet()){
            Hobby hobby = m.getKey();
@@ -29,7 +48,8 @@ public class Main {
            if(interested > 0) {
                System.out.println("Hobby " + hobby.getName() + " has " + interested + " interested people");
            }
-       }
+       }*/
+       /////////
 
         /*
         System.out.println(hobbyDAO.getCountOfPeopleByHobbyId(1));
@@ -57,7 +77,7 @@ public class Main {
         address1.setStreet("Lyngby Hovedgade 2");
 
         address1.setZip(zip1);
-        user1Details.setAddress(address1);
+        //user1Details.setAddress(address1);
         user1.setUserDetails(user1Details);
 
         Hobby hobby1 = hobbyDAO.read(1);
@@ -67,9 +87,8 @@ public class Main {
         if(!wasFound)
             userDAO.create(user1);
         else
-            userDAO.update(user1);
-
-
+            userDAO.update(user1)
+            
         User user2 = userDAO.read("Christian1234");
         if(user2 == null){
             user2 = new User("Christian1234", "1234", false);
@@ -80,31 +99,28 @@ public class Main {
         //userDAO.create(new User("Coolguy","coolpassword",false));
 
         User testUser = userDAO.read("Coolguy");
+        if(testUser == null){
+            testUser = new User("Coolguy", "stop", false);
+            userDAO.create(testUser);
+        }
         Hobby hobby2 = hobbyDAO.read(1);
         UserDetails userDetails1 = testUser.getUserDetails();
-        if(userDetails1 == null){
-            userDetails1 = new UserDetails();
-        }
         userDetails1.setAge(22);
         userDetails1.setGender(Gender.MALE);
 
         Address testAddress = userDetails1.getAddress();
-        if(testAddress == null){
-            testAddress = new Address();
-        }
         Zip testZip = testAddress.getZip();
 
-        if(testZip == null){
+        if (testZip == null) {
             testZip = zipDAO.read(2700);
         }
 
 
         testAddress.setZip(testZip);
         testAddress.setStreet("Bellahøjvej 31");
-        userDetails1.setAddress(testAddress);
         testAddress.setUserDetails(userDetails1);
         userDetails1.setPhone_number(42212345);
-        testUser.setUserDetails(userDetails1);
+        
         testUser.addHobby(hobby2);
         userDAO.update(testUser);
         List<UserUserDetailsDTO> usersByHobbyList = userDAO.getUsersByHobby(hobby2);
@@ -114,6 +130,15 @@ public class Main {
         Map<Hobby, Long> popularHobbies = hobbyDAO.getHobbiesByPopularity(1,10);
         for(Map.Entry<Hobby, Long> entry : popularHobbies.entrySet()){
             System.out.println(entry.getKey().getName() + " Number of participants:"+ entry.getValue());
+        }
+        // US - 10
+        Map<User,Integer> result1 = userDAO.getUsersAndHobbyCountByAddress(testAddress);
+        for (Map.Entry<User,Integer> m : result1.entrySet()){
+            User user = m.getKey();
+            Integer hobbyCount = m.getValue();
+            if(hobbyCount > 0) {
+                System.out.println("User " + user.getUsername() + " has " + hobbyCount + " hobbies");
+            }
         }
 
         /* Remember to close. */
