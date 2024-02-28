@@ -21,15 +21,17 @@ public class Main {
         AddressDAOImpl addressDAO = AddressDAOImpl.getInstance();
         ZipDAOImpl zipDAO = ZipDAOImpl.getInstance();
         UserDetailsDAO userDetailsDAO = UserDetailsDAOImpl.getInstance();
-        // US - 6
-        Map<Hobby, Integer> result = hobbyDAO.getHobbyWithCountOfInterestedPeople();
-        for (Map.Entry<Hobby, Integer> m : result.entrySet()) {
-            Hobby hobby = m.getKey();
-            Integer interested = m.getValue();
-            if (interested > 0) {
-                System.out.println("Hobby " + hobby.getName() + " has " + interested + " interested people");
-            }
-        }
+
+    /*    // US - 6
+        Map<Hobby,Integer> result = hobbyDAO.getHobbyWithCountOfInterestedPeople();
+       for (Map.Entry<Hobby,Integer> m : result.entrySet()){
+           Hobby hobby = m.getKey();
+           Integer interested = m.getValue();
+           if(interested > 0) {
+               System.out.println("Hobby " + hobby.getName() + " has " + interested + " interested people");
+           }
+       }*/
+       /////////
 
         /*
         System.out.println(hobbyDAO.getCountOfPeopleByHobbyId(1));
@@ -57,7 +59,7 @@ public class Main {
         address1.setStreet("Lyngby Hovedgade 2");
 
         address1.setZip(zip1);
-        user1Details.setAddress(address1);
+        //user1Details.setAddress(address1);
         user1.setUserDetails(user1Details);
 
         Hobby hobby1 = hobbyDAO.read(1);
@@ -101,11 +103,22 @@ public class Main {
         testAddress.setStreet("Bellahøjvej 31");
         testAddress.setUserDetails(userDetails1);
         userDetails1.setPhone_number(42212345);
+        
         testUser.addHobby(hobby2);
         userDAO.update(testUser);
         List<UserUserDetailsDTO> usersByHobbyList = userDAO.getUsersByHobby(hobby2);
         usersByHobbyList.forEach(System.out::println);
 
+
+        // US - 10
+        Map<User,Integer> result1 = userDAO.getUsersAndHobbyCountByAddress(testAddress);
+        for (Map.Entry<User,Integer> m : result1.entrySet()){
+            User user = m.getKey();
+            Integer hobbyCount = m.getValue();
+            if(hobbyCount > 0) {
+                System.out.println("User " + user.getUsername() + " has " + hobbyCount + " hobbies");
+            }
+        }
 
         /* Remember to close. */
         emf.close();

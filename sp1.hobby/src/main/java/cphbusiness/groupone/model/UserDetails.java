@@ -39,7 +39,6 @@ public class UserDetails implements SuperEntity<String> {
     public User addUser(User user){
         if(user != null){
             this.user = user;
-            user.setUserDetails(this);
         }
         return user;
     }
