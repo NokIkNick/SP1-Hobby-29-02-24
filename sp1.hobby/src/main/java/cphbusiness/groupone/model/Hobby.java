@@ -1,6 +1,7 @@
 package cphbusiness.groupone.model;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -9,16 +10,17 @@ import java.util.Set;
 
 @Getter
 @Setter
+@EqualsAndHashCode
 @jakarta.persistence.Entity(name = "hobby")
-@NamedQueries(
-        {
-                // US - 5
-                @NamedQuery(name = "Hobby.countOfPeopleByHobby", query = "select size(h.usersSet) from hobby h where id = ?1"),
-                // US - 6
-                @NamedQuery(name = "Hobby.findHobbiesWithInterestCounts", query = "SELECT h, size(h.interestedUsers) FROM hobby h")
-        }
+@NamedQueries({
+
+        // US - 5
+        @NamedQuery(name = "Hobby.countOfPeopleByHobby", query = "select size(h.usersSet) from hobby h where id = ?1"),
+        // US - 6
+        @NamedQuery(name = "Hobby.findHobbiesWithInterestCounts", query = "SELECT h, size(h.interestedUsers) FROM hobby h")
+}
 )
-public class Hobby implements Entity<Integer> {
+public class Hobby implements Entity<Integer>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

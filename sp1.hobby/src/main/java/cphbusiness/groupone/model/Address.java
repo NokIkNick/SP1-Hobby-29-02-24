@@ -28,7 +28,12 @@ public class Address implements Entity<String> {
     private Zip zip;
 
 
-    UserDetails setUserDetails(UserDetails userDetails){
+    public Address(String street, Zip zip) {
+        this.street = street;
+        this.zip = zip;
+    }
+
+    public UserDetails setUserDetails(UserDetails userDetails){
         if(userDetails != null && !Objects.equals(this.userDetails,userDetails)){
             this.userDetails = userDetails;
             userDetails.setAddress(this);

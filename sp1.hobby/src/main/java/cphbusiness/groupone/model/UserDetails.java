@@ -3,14 +3,17 @@ package cphbusiness.groupone.model;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @jakarta.persistence.Entity(name = "user_details")
 public class UserDetails implements Entity<String> {
+
     @Override
     public String getID() {
         return id;
@@ -33,6 +36,12 @@ public class UserDetails implements Entity<String> {
     Address address;
 
 
+    public UserDetails(int age, Gender gender, int phone_number, Address address) {
+        this.age = age;
+        this.gender = gender;
+        this.phone_number = phone_number;
+        this.address = address;
+    }
 
     @SuppressWarnings("UnusedReturnValue")
     public User addUser(User user){
