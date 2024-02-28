@@ -92,9 +92,6 @@ public class Main {
         userDetails1.setGender(Gender.MALE);
 
         Address testAddress = userDetails1.getAddress();
-        if (testAddress == null) {
-            testAddress = new Address();
-        }
         Zip testZip = testAddress.getZip();
 
         if (testZip == null) {
@@ -104,10 +101,9 @@ public class Main {
 
         testAddress.setZip(testZip);
         testAddress.setStreet("Bellahøjvej 31");
-        userDetails1.setAddress(testAddress);
         testAddress.setUserDetails(userDetails1);
         userDetails1.setPhone_number(42212345);
-
+        
         testUser.addHobby(hobby2);
         userDAO.update(testUser);
         List<UserUserDetailsDTO> usersByHobbyList = userDAO.getUsersByHobby(hobby2);
