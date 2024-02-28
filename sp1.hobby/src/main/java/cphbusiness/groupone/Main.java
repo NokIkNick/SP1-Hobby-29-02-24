@@ -2,13 +2,12 @@ package cphbusiness.groupone;
 
 import cphbusiness.groupone.config.HobbyConfig;
 
-import cphbusiness.groupone.dao.abstractDAOs.UserDetailsDAO;
 import cphbusiness.groupone.dao.implementations.*;
 import cphbusiness.groupone.dto.UserUserDetailsDTO;
+import cphbusiness.groupone.exceptions.NoResultException;
+import cphbusiness.groupone.system.ExceptionLogger;
 import cphbusiness.groupone.model.*;
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.criteria.CriteriaBuilder;
 
 import java.util.List;
 import java.util.Map;
@@ -143,7 +142,7 @@ public class Main {
                 System.out.println("User " + user.getUsername() + " has " + hobbyCount + " hobbies");
             }
         }
-
+        
         /* Remember to close. */
         emf.close();
     }

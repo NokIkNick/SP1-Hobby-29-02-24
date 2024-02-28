@@ -1,7 +1,9 @@
 package cphbusiness.groupone.dao.implementations;
 
 import cphbusiness.groupone.dao.abstractDAOs.HobbyDAO;
+import cphbusiness.groupone.exceptions.NoResultException;
 import cphbusiness.groupone.model.Hobby;
+import cphbusiness.groupone.system.ExceptionLogger;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 
@@ -35,9 +37,13 @@ public class HobbyDAOImpl extends HobbyDAO {
                 return (int) amoutOfPeopleByHobby.getSingleResult();
             }else {
                 // logic to handle nothing found TODO
+                ExceptionLogger.log(new NoResultException("No results found").toString());
                 return 0;
             }
+        }catch(Exception e){
+            ExceptionLogger.log(e.toString());
         }
+        return 0;
     }
     // US-6
     @Override
@@ -54,10 +60,12 @@ public class HobbyDAOImpl extends HobbyDAO {
                 return hobbyIntegerMap;
             } else {
                 // add logic to handle no information found // TODO
-                return null;
+                ExceptionLogger.log(new NoResultException("No results found").toString());
             }
+        }catch (Exception e){
+            ExceptionLogger.log(e.toString());
         }
-
+        return null;
     }
 
     @Override
@@ -79,6 +87,9 @@ public class HobbyDAOImpl extends HobbyDAO {
                             (oldValue,newValue) -> oldValue, //If the value is a duplicate, keep the old one.
                             LinkedHashMap::new)); //Workaround, so that we keep the order the values are placed in the map.
             return sorted;
+        }catch (Exception e){
+            ExceptionLogger.log(new NoResultException("No results found", e).toString());
         }
+        return null;
     }
 }

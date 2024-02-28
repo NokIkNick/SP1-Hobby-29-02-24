@@ -3,8 +3,10 @@ package cphbusiness.groupone.dao.implementations;
 import cphbusiness.groupone.config.HibernateConfig;
 import cphbusiness.groupone.config.HobbyConfig;
 import cphbusiness.groupone.dao.abstractDAOs.UserDAO;
+import cphbusiness.groupone.exceptions.NoResultException;
 import cphbusiness.groupone.model.Address;
 import cphbusiness.groupone.model.User;
+import cphbusiness.groupone.system.ExceptionLogger;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
@@ -55,7 +57,7 @@ public class UserDAOImpl extends UserDAO {
                                 );
                 return userHobbyCountMap;
             }else {
-                // add logic to handle no information found. TODO
+                ExceptionLogger.log(new NoResultException("No results found").toString());
                 return null;
             }
         }
@@ -65,10 +67,8 @@ public class UserDAOImpl extends UserDAO {
     public List<UserUserDetailsDTO> getUsersByHobby(Hobby hobby) {
         if(hobby != null){
             try(var em = emf.createEntityManager()){
-                em.getTransaction().begin();
                 TypedQuery<UserUserDetailsDTO> query = em.createNamedQuery("User.getUsersByHobby", UserUserDetailsDTO.class);
                 query.setParameter("value",hobby);
-                em.getTransaction().commit();
                 return query.getResultList();
             }
         }
@@ -77,7 +77,6 @@ public class UserDAOImpl extends UserDAO {
 
     public List<User> usersFromGivenCity(String city){
         try(EntityManager entityManager = HobbyConfig.getInstance().createEntityManager()){
-            //entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select u from users u where u.userDetails.address.zip.city_name = :city");
             query.setParameter("city",city);
             List<User> users = query.getResultList();
