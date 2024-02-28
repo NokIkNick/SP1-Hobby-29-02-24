@@ -15,7 +15,7 @@ class HobbyDAOImplTest {
     private static HobbyDAO dao;
 
     @BeforeAll
-    static void beforeAll(){
+    static void beforeAll() {
         CommonTestData.setupHobbies();
         CommonTestData.setupZips();
         dao = HobbyDAOImpl.getInstance();

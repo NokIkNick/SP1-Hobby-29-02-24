@@ -10,10 +10,10 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@jakarta.persistence.Entity
+@Entity
 @Table(name = "address")
 @NoArgsConstructor
-public class Address implements Entity<String> {
+public class Address implements SuperEntity<String> {
 
     @Id
     @Setter(AccessLevel.NONE)

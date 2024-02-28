@@ -1,5 +1,5 @@
 package cphbusiness.groupone.model;
 
-public interface Entity<IDType> {
+public interface SuperEntity<IDType> {
     IDType getID();
 }

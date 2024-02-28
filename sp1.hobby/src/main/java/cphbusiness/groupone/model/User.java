@@ -13,7 +13,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-@jakarta.persistence.Entity(name = "users")
+@Entity(name = "users")
 @NoArgsConstructor
 
 @NamedQueries({
@@ -21,7 +21,7 @@ import java.util.Set;
         @NamedQuery(name="User.getUsersByHobby", query = "select new cphbusiness.groupone.dto.UserUserDetailsDTO(u.username, us) from cphbusiness.groupone.model.User u join cphbusiness.groupone.model.UserDetails us on us.user.id = u.id where :value member of u.hobbies")
 })
 
-public class User implements Entity<String> {
+public class User implements SuperEntity<String> {
 
     @Id
     @Column(name = "username", nullable = false)
