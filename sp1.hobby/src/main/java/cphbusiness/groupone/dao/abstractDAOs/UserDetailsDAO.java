@@ -11,4 +11,6 @@ public abstract class UserDetailsDAO extends DAO<UserDetails, String> {
     }
     public abstract List<Integer> getPhoneNumbersFromGivenPerson(String username);
     public abstract UserDetails getTheDetail(String username);
+
+    public abstract void changeGender(Enum gender,String username);
 }
