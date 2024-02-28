@@ -1,18 +1,30 @@
 package cphbusiness.groupone;
 
 import cphbusiness.groupone.config.HobbyConfig;
+<<<<<<< Updated upstream
 import cphbusiness.groupone.dao.implementations.*;
+=======
+import cphbusiness.groupone.dao.IDAO;
+import cphbusiness.groupone.dao.implementations.HobbyDAOImpl;
+import cphbusiness.groupone.dao.implementations.UserDAOImpl;
+>>>>>>> Stashed changes
 import cphbusiness.groupone.model.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
+<<<<<<< Updated upstream
 import java.util.ArrayList;
 import java.util.List;
+=======
+import java.util.List;
+import java.util.Set;
+>>>>>>> Stashed changes
 
 public class Main {
     public static void main(String[] args) {
         EntityManagerFactory emf = HobbyConfig.getInstance(false);
 
+<<<<<<< Updated upstream
         UserDAOImpl userDAO = UserDAOImpl.getInstance();
         HobbyDAOImpl hobbyDAO = HobbyDAOImpl.getInstance();
         AddressDAOImpl addressDAO = AddressDAOImpl.getInstance();
@@ -52,5 +64,8 @@ public class Main {
             //emf.close();
 
         //}
+=======
+        
+>>>>>>> Stashed changes
     }
 }
