@@ -27,12 +27,6 @@ public class Address implements SuperEntity<String> {
     @ManyToOne
     private Zip zip;
 
-
-    public Address(String street, Zip zip) {
-        this.street = street;
-        this.zip = zip;
-    }
-
     public UserDetails setUserDetails(UserDetails userDetails){
         if(userDetails != null && !Objects.equals(this.userDetails,userDetails)){
             this.userDetails = userDetails;
