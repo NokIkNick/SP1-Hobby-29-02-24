@@ -6,17 +6,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNotNull;
-
 class UserDetailsDAOTest {
-    @SuppressWarnings("FieldCanBeLocal")
-    private static UserDetailsDAO dao;
     @BeforeAll
     static void beforeAll(){
         CommonTestData.setupHobbies();
         CommonTestData.setupZips();
-        dao = UserDetailsDAOImpl.getInstance();
     }
 
     @Test

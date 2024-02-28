@@ -44,7 +44,8 @@ public class Hobby implements SuperEntity<Integer> {
     User addUser(User user){
         if(user != null && !usersSet.contains(user)){
             this.usersSet.add(user);
-            user.addHobby(this);
+            if(!user.getHobbies().contains(this))
+                user.addHobby(this);
         }
         return user;
     }
@@ -54,7 +55,8 @@ public class Hobby implements SuperEntity<Integer> {
             if(!Hibernate.isInitialized(this.interestedUsers))
                 Hibernate.initialize(this.interestedUsers);
             this.interestedUsers.add(user);
-            user.addHobbyToInterests(this);
+            if(!user.getHobbyInterests().contains(this))
+                user.addHobbyToInterests(this);
         }
         return user;
     }
