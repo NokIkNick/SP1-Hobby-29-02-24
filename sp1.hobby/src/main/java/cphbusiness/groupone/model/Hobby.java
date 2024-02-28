@@ -10,6 +10,7 @@ import java.util.Set;
 
 @Getter
 @Setter
+@EqualsAndHashCode
 @Entity(name = "hobby")
 @NamedQueries({
 

@@ -16,6 +16,7 @@ import java.util.Set;
 @Entity(name = "users")
 @NoArgsConstructor
 @NamedQueries({
+        //US: 3
         @NamedQuery(name="User.getUsersByHobby", query = "select new cphbusiness.groupone.dto.UserUserDetailsDTO(u.username, us) from cphbusiness.groupone.model.User u join cphbusiness.groupone.model.UserDetails us on us.user.id = u.id where :value member of u.hobbies")
 })
 public class User implements DTO<String> {

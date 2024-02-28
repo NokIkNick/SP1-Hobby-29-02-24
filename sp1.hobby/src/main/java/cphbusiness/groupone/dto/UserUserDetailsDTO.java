@@ -14,6 +14,6 @@ public class UserUserDetailsDTO {
 
     @Override
     public String toString() {
-        return "name: " + this.username + " address:" + userDetails.getAddress() + " age:" + userDetails.getAge() + " phone" + userDetails.getPhone_number() + " gender:" + userDetails.getGender();
+        return "name: " + this.username + ". address:" + userDetails.getAddress().getStreet() +". zip:"+userDetails.getAddress().getZip().getID()+ ". age:" + userDetails.getAge() + ". phone:" + userDetails.getPhone_number() + ". gender:" + userDetails.getGender();
     }
 }

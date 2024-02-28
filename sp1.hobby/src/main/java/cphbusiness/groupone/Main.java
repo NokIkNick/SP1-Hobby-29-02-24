@@ -1,10 +1,8 @@
 package cphbusiness.groupone;
 
 import cphbusiness.groupone.config.HobbyConfig;
-import cphbusiness.groupone.dao.implementations.AddressDAOImpl;
-import cphbusiness.groupone.dao.implementations.HobbyDAOImpl;
-import cphbusiness.groupone.dao.implementations.UserDAOImpl;
-import cphbusiness.groupone.dao.implementations.ZipDAOImpl;
+import cphbusiness.groupone.dao.abstractDAOs.UserDetailsDAO;
+import cphbusiness.groupone.dao.implementations.*;
 import cphbusiness.groupone.dto.UserUserDetailsDTO;
 import cphbusiness.groupone.model.*;
 import jakarta.persistence.EntityManager;
@@ -22,6 +20,7 @@ public class Main {
         HobbyDAOImpl hobbyDAO = HobbyDAOImpl.getInstance();
         AddressDAOImpl addressDAO = AddressDAOImpl.getInstance();
         ZipDAOImpl zipDAO = ZipDAOImpl.getInstance();
+        UserDetailsDAO userDetailsDAO = UserDetailsDAOImpl.getInstance();
         // US - 6
         Map<Hobby,Integer> result = hobbyDAO.getHobbyWithCountOfInterestedPeople();
        for (Map.Entry<Hobby,Integer> m : result.entrySet()){
@@ -79,8 +78,33 @@ public class Main {
         userDAO.delete(user2);
         */
         //userDAO.create(new User("Coolguy","coolpassword",false));
+
         User testUser = userDAO.read("Coolguy");
         Hobby hobby2 = hobbyDAO.read(1);
+        UserDetails userDetails1 = testUser.getUserDetails();
+        if(userDetails1 == null){
+            userDetails1 = new UserDetails();
+        }
+        userDetails1.setAge(22);
+        userDetails1.setGender(Gender.MALE);
+
+        Address testAddress = userDetails1.getAddress();
+        if(testAddress == null){
+            testAddress = new Address();
+        }
+        Zip testZip = testAddress.getZip();
+
+        if(testZip == null){
+            testZip = zipDAO.read(2700);
+        }
+
+
+        testAddress.setZip(testZip);
+        testAddress.setStreet("Bellahøjvej 31");
+        userDetails1.setAddress(testAddress);
+        testAddress.setUserDetails(userDetails1);
+        userDetails1.setPhone_number(42212345);
+        testUser.setUserDetails(userDetails1);
         testUser.addHobby(hobby2);
         userDAO.update(testUser);
         List<UserUserDetailsDTO> usersByHobbyList = userDAO.getUsersByHobby(hobby2);

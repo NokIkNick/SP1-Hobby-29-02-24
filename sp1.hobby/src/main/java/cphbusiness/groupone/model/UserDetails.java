@@ -3,12 +3,14 @@ package cphbusiness.groupone.model;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity(name = "user_details")
 public class UserDetails implements DTO<String>{
     @Override
@@ -33,6 +35,12 @@ public class UserDetails implements DTO<String>{
     Address address;
 
 
+    public UserDetails(int age, Gender gender, int phone_number, Address address) {
+        this.age = age;
+        this.gender = gender;
+        this.phone_number = phone_number;
+        this.address = address;
+    }
 
     @SuppressWarnings("UnusedReturnValue")
     public User addUser(User user){
