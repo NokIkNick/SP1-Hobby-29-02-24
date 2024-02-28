@@ -1,7 +1,11 @@
 package cphbusiness.groupone.dao.implementations;
 
 import cphbusiness.groupone.dao.abstractDAOs.UserDAO;
+import cphbusiness.groupone.model.Hobby;
 import cphbusiness.groupone.model.User;
+import cphbusiness.groupone.model.UserDetails;
+
+import java.util.HashMap;
 
 public class UserDAOImpl extends UserDAO {
 

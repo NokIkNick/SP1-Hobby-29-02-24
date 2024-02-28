@@ -15,7 +15,7 @@ public class Main {
         AddressDAOImpl addressDAO = AddressDAOImpl.getInstance();
         ZipDAOImpl zipDAO = ZipDAOImpl.getInstance();
         UserDetailsDAOImpl userDetailsDAO = new UserDetailsDAOImpl();
-        System.out.println(userDetailsDAO.userDetailByPhoneNumber(4558879));
+        System.out.println(userDetailsDAO.getUserDetailsByPhoneNumber(4558879));
             /*Hobby hobby1 = hobbyDAO.read(1, Hobby.class);
             Zip zip1 = zipDAO.read(9293, Zip.class);
             boolean wasFound = true;
