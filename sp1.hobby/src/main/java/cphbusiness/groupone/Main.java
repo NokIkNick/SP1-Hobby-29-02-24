@@ -111,6 +111,11 @@ public class Main {
         usersByHobbyList.forEach(System.out::println);
 
 
+        Map<Hobby, Long> popularHobbies = hobbyDAO.getHobbiesByPopularity(1,10);
+        for(Map.Entry<Hobby, Long> entry : popularHobbies.entrySet()){
+            System.out.println(entry.getKey().getName() + " Number of participants:"+ entry.getValue());
+        }
+
         /* Remember to close. */
         emf.close();
     }
