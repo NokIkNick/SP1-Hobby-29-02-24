@@ -20,6 +20,13 @@ public class Zip implements SuperEntity<Integer> {
     private String municipality_name;
 
     @Override
+    public String getLoggerInfo() {
+        StringBuilder string = new StringBuilder();
+        string.append(zip).append(" ").append(city_name);
+        return string.toString();
+    }
+
+    @Override
     public Integer getID() {
         return zip;
     }

@@ -1,15 +1,15 @@
 package cphbusiness.groupone.exceptions;
 
-import cphbusiness.groupone.system.ExceptionLogger;
+import cphbusiness.groupone.system.Logger;
 
 public class NoResultException extends Exception{
     public NoResultException(String msg){
         super(msg);
-        ExceptionLogger.log(msg);
+        Logger.exceptionLog(msg);
     }
 
     public NoResultException(String msg, Exception e){
         super(msg);
-        ExceptionLogger.log(msg+" "+e.toString());
+        Logger.exceptionLog(msg+" "+e.toString());
     }
 }

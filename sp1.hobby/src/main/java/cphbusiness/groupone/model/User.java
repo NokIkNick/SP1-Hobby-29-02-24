@@ -100,6 +100,14 @@ public class User implements SuperEntity<String> {
     }
 
     @Override
+    public String getLoggerInfo() {
+        StringBuilder string = new StringBuilder();
+        string.append(username);
+        return string.toString();
+    }
+
+
+    @Override
     public String getID() {
         return username;
     }

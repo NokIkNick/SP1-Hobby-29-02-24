@@ -37,6 +37,13 @@ public class Address implements SuperEntity<String> {
     }
 
     @Override
+    public String getLoggerInfo() {
+        StringBuilder string = new StringBuilder();
+        string.append(id).append(" ").append(street);
+        return string.toString();
+    }
+
+    @Override
     public String getID() {
         return id;
     }
