@@ -3,14 +3,8 @@ package cphbusiness.groupone;
 import cphbusiness.groupone.config.HobbyConfig;
 
 import cphbusiness.groupone.dao.implementations.*;
-import cphbusiness.groupone.dto.UserUserDetailsDTO;
-import cphbusiness.groupone.exceptions.NoResultException;
-import cphbusiness.groupone.system.ExceptionLogger;
 import cphbusiness.groupone.model.*;
 import jakarta.persistence.EntityManagerFactory;
-
-import java.util.List;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,7 +16,7 @@ public class Main {
         ZipDAOImpl zipDAO = ZipDAOImpl.getInstance();
         UserDetailsDAOImpl userDetailsDAO = new UserDetailsDAOImpl();
 
-        userDAO.create(new User("WhatACoolDude","whatAnAwesomePassword",false));
+        userDAO.create(new User("ManderMand","whatAnAwesomePassword",false));
 
         //userDetailsDAO.changeGender(Gender.FEMALE,"Christian1234");
 

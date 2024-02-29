@@ -1,0 +1,2 @@
+org.hibernate.exception.ConstraintViolationException: could not execute statement [ERROR: duplicate key value violates unique constraint "users_pkey"
+  Detail: Key (username)=(ManderMand) already exists.] [/* insert for cphbusiness.groupone.model.User */insert into users (date_created,is_admin,last_updated,password,username) values (?,?,?,?,?)] | 2024-02-29T10:44:46.232714200

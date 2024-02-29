@@ -4,9 +4,8 @@ import cphbusiness.groupone.config.HobbyConfig;
 import cphbusiness.groupone.dao.abstractDAOs.UserDetailsDAO;
 import cphbusiness.groupone.exceptions.NoResultException;
 import cphbusiness.groupone.model.Gender;
-import cphbusiness.groupone.model.User;
 import cphbusiness.groupone.model.UserDetails;
-import cphbusiness.groupone.system.ExceptionLogger;
+import cphbusiness.groupone.system.Logger;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import java.util.List;
@@ -41,7 +40,7 @@ public class UserDetailsDAOImpl extends UserDetailsDAO {
                 UserDetails foundDetail = (UserDetails) query.getSingleResult();
                 return foundDetail;
             }else{
-                ExceptionLogger.log(new NoResultException("No results found").toString());
+                Logger.exceptionLog(new NoResultException("No results found").toString());
                 return null;
             }
          }

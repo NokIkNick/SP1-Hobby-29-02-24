@@ -65,4 +65,11 @@ public class Hobby implements SuperEntity<Integer> {
     public Integer getID() {
         return id;
     }
+
+    @Override
+    public String getLoggerInfo() {
+        StringBuilder string = new StringBuilder();
+        string.append(id).append(" ").append(name);
+        return string.toString();
+    }
 }

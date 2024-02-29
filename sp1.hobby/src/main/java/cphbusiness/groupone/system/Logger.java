@@ -4,10 +4,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-public class ExceptionLogger {
+public class Logger {
 
 
-    public static void log(String in){
+    public static void exceptionLog(String in){
         try(FileWriter fileWriter = new FileWriter("exceptionLog.txt", true)){
             fileWriter.write(in);
             fileWriter.append(" | ");
@@ -16,5 +16,9 @@ public class ExceptionLogger {
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    public static void consoleLog(String in){
+        System.out.println(in);
     }
 }

@@ -1,25 +1,20 @@
 package cphbusiness.groupone.dao.implementations;
 
-import cphbusiness.groupone.config.HibernateConfig;
 import cphbusiness.groupone.config.HobbyConfig;
 import cphbusiness.groupone.dao.abstractDAOs.UserDAO;
 import cphbusiness.groupone.exceptions.NoResultException;
 import cphbusiness.groupone.model.Address;
 import cphbusiness.groupone.model.User;
-import cphbusiness.groupone.system.ExceptionLogger;
+import cphbusiness.groupone.system.Logger;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import cphbusiness.groupone.dto.UserUserDetailsDTO;
 import cphbusiness.groupone.model.Hobby;
-
-import java.util.List;
 
 public class UserDAOImpl extends UserDAO {
 
@@ -57,7 +52,7 @@ public class UserDAOImpl extends UserDAO {
                                 );
                 return userHobbyCountMap;
             }else {
-                ExceptionLogger.log(new NoResultException("No results found").toString());
+                Logger.exceptionLog(new NoResultException("No results found").toString());
                 return null;
             }
         }

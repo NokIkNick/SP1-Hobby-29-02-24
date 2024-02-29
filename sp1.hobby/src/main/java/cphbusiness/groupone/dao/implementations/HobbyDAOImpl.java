@@ -3,7 +3,7 @@ package cphbusiness.groupone.dao.implementations;
 import cphbusiness.groupone.dao.abstractDAOs.HobbyDAO;
 import cphbusiness.groupone.exceptions.NoResultException;
 import cphbusiness.groupone.model.Hobby;
-import cphbusiness.groupone.system.ExceptionLogger;
+import cphbusiness.groupone.system.Logger;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 
@@ -37,11 +37,11 @@ public class HobbyDAOImpl extends HobbyDAO {
                 return (int) amountOfPeopleByHobby.getSingleResult();
             }else {
                 // logic to handle nothing found TODO
-                ExceptionLogger.log(new NoResultException("No results found").toString());
+                Logger.exceptionLog(new NoResultException("No results found").toString());
                 return 0;
             }
         }catch(Exception e){
-            ExceptionLogger.log(e.toString());
+            Logger.exceptionLog(e.toString());
         }
         return 0;
     }
@@ -60,10 +60,10 @@ public class HobbyDAOImpl extends HobbyDAO {
                 return hobbyIntegerMap;
             } else {
                 // add logic to handle no information found // TODO
-                ExceptionLogger.log(new NoResultException("No results found").toString());
+                Logger.exceptionLog(new NoResultException("No results found").toString());
             }
         }catch (Exception e){
-            ExceptionLogger.log(e.toString());
+            Logger.exceptionLog(e.toString());
         }
         return null;
     }
@@ -88,7 +88,7 @@ public class HobbyDAOImpl extends HobbyDAO {
                             LinkedHashMap::new)); //Workaround, so that we keep the order the values are placed in the map.
             return sorted;
         }catch (Exception e){
-            ExceptionLogger.log(new NoResultException("No results found", e).toString());
+            Logger.exceptionLog(new NoResultException("No results found", e).toString());
         }
         return null;
     }
