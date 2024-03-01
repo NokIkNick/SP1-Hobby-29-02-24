@@ -7,12 +7,14 @@ The business idea is to create a platform that not only provides information abo
 ![sp1.hobby/src/main/java/cphbusiness/groupone/docs/DomainModel-Domain_Model-Final.png](sp1.hobby/src/main/java/cphbusiness/groupone/docs/DomainModel-Domain_Model-Final.png)
 
 ## ERD:
-![sp1.hobby/src/main/java/cphbusiness/groupone/docs/DomainModelHobby.png](sp1.hobby/src/main/java/cphbusiness/groupone/docs/DomainModelHobby.png)
+![sp1.hobby/src/main/java/cphbusiness/groupone/docs/ERD010324.png](sp1.hobby/src/main/java/cphbusiness/groupone/docs/ERD010324.png)
 
 ## GROUP DESCRIPTION - HOW WE WORKED:
 
 - Used Kanban for project overview and distribution of to-do's.
-- Day 1: Created Github repository for the project + Kanban board. Created Domainmodel and ER-diagram. Created project in IntelliJ and established entity relations.
+
+## KANBAN BOARD:
+![sp1.hobby/src/main/java/cphbusiness/groupone/docs/KanbanBoard.png](sp1.hobby/src/main/java/cphbusiness/groupone/docs/KanbanBoard.png)
 
 ## TECHNICAL REQUIREMENTS:
 
