@@ -15,5 +15,6 @@ public abstract class UserDAO extends DAO<User, String> {
     public abstract Map<User,Integer> getUsersAndHobbyCountByAddress(Address address);
 
     public abstract List<UserUserDetailsDTO> getUsersByHobby(Hobby hobby);
+    public abstract List<User> usersFromGivenCity(String city);
 
 }

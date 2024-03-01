@@ -2,12 +2,12 @@ package unitTests;
 
 import cphbusiness.groupone.config.HobbyConfig;
 import cphbusiness.groupone.dao.abstractDAOs.HobbyDAO;
+import cphbusiness.groupone.dao.abstractDAOs.UserDAO;
 import cphbusiness.groupone.dao.abstractDAOs.ZipDAO;
 import cphbusiness.groupone.dao.implementations.HobbyDAOImpl;
+import cphbusiness.groupone.dao.implementations.UserDAOImpl;
 import cphbusiness.groupone.dao.implementations.ZipDAOImpl;
-import cphbusiness.groupone.model.Hobby;
-import cphbusiness.groupone.model.Type;
-import cphbusiness.groupone.model.Zip;
+import cphbusiness.groupone.model.*;
 import jakarta.persistence.EntityManagerFactory;
 
 class CommonTestData {
@@ -32,6 +32,20 @@ class CommonTestData {
         popHobby(h2, Type.OUTDOORS, "Football", "...", "Generel");
         dao.create(h2);
         hobby2id = h2.getID();
+
+        UserDAO uDAO = UserDAOImpl.getInstance();
+        User u1 = new User("test user hobbies", "nothing", false);
+        uDAO.create(u1);
+        u1.getUserDetails().setAge(999);
+        u1.getUserDetails().setGender(Gender.NOTSPECIFIED);
+        u1.getUserDetails().getAddress().setStreet("Test Hobbies");
+        ZipDAO zdao = ZipDAOImpl.getInstance();
+        Zip z1 = new Zip();
+        popZip(z1, 999956, "Christiansborg", "københavn", "Sjælland");
+        zdao.create(z1);
+        u1.getUserDetails().getAddress().setZip(zdao.read(999956));
+        u1.addHobby(h1);
+        uDAO.update(u1);
     }
     
     static void setupZips(){
@@ -44,6 +58,17 @@ class CommonTestData {
         Zip z2 = new Zip();
         popZip(z2, 999998, "Maginaryland", "Yggdrasil", "Hell");
         dao.create(z2);
+    }
+
+    static void setupAddresses(){
+        commonSetup();
+        UserDAO uDAO = UserDAOImpl.getInstance();
+        User u1 = new User("test user Address", "nothing", false);
+        uDAO.create(u1);
+        u1.getUserDetails().setAge(999);
+        u1.getUserDetails().setGender(Gender.NOTSPECIFIED);
+        u1.getUserDetails().getAddress().setStreet("Address1");
+        uDAO.update(u1);
     }
 
     public static void popHobby(Hobby h, Type t, String name, String link, String cat){
