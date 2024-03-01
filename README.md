@@ -11,10 +11,11 @@ The business idea is to create a platform that not only provides information abo
 
 ## GROUP DESCRIPTION - HOW WE WORKED:
 
-- Used Kanban for project overview and distribution of to-do's.
+- Used Kanban for project overview and distribution of to-do's. Each group member assigned themselves a few USER-STORIES that they wanted to work on.
+- The initial project was created in unision, with each relation for every entity being decided upon together.
 
 ## KANBAN BOARD:
-![sp1.hobby/src/main/java/cphbusiness/groupone/docs/KanbanBoard.png](sp1.hobby/src/main/java/cphbusiness/groupone/docs/KanbanBoard.png)
+![https://github.com/users/NokIkNick/projects/3](sp1.hobby/src/main/java/cphbusiness/groupone/docs/KanbanBoard.png)
 
 ## TECHNICAL REQUIREMENTS:
 
