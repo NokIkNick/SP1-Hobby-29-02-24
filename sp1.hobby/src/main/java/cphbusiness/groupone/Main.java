@@ -16,7 +16,7 @@ public class Main {
         ZipDAOImpl zipDAO = ZipDAOImpl.getInstance();
         UserDetailsDAOImpl userDetailsDAO = new UserDetailsDAOImpl();
 
-        userDAO.create(new User("ManderMand","whatAnAwesomePassword",false));
+        userDAO.create(new User("testmand","whatAnAwesomePassword",false));
 
         //userDetailsDAO.changeGender(Gender.FEMALE,"Christian1234");
 
