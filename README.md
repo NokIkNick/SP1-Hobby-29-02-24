@@ -15,7 +15,9 @@ The business idea is to create a platform that not only provides information abo
 - The initial project was created in unision, with each relation for every entity being decided upon together.
 
 ## KANBAN BOARD:
-![https://github.com/users/NokIkNick/projects/3](sp1.hobby/src/main/java/cphbusiness/groupone/docs/KanbanBoard.png)
+![](sp1.hobby/src/main/java/cphbusiness/groupone/docs/KanbanBoard.png)
+
+### Link to project: https://github.com/users/NokIkNick/projects/3
 
 ## TECHNICAL REQUIREMENTS:
 
