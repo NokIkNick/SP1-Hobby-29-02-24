@@ -14,6 +14,17 @@ The business idea is to create a platform that not only provides information abo
 - Used Kanban for project overview and distribution of to-do's. Each group member assigned themselves a few USER-STORIES that they wanted to work on.
 - The initial project was created in unision, with each relation for every entity being decided upon together.
 
+### Group members:
+
+- Patrick Fabrin | email: cph-pf73@cphbuisiness.dk
+  
+- Christian Høj | email: cph-ch633@cphbusiness.dk
+
+- Nicolai Theis Rolin | email: cph-nr140@cphbusiness.dk
+
+- Nicklas Waldemar Seier Winther | email: cph-nw89@cphbusiness.dk
+
+
 ## KANBAN BOARD:
 ![](sp1.hobby/src/main/java/cphbusiness/groupone/docs/KanbanBoard.png)
 
